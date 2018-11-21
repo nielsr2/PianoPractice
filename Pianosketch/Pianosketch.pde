@@ -7,7 +7,7 @@ NoteManager testManager = new NoteManager(24);
 void setup() {
 size(1000,1000);
 
-img = loadImage("assets/piano.jpg");
+img = loadImage("assets/piano2.png");
 testManager.spreadOut();
 
 }

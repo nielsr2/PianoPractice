@@ -35,7 +35,7 @@ NoteManager(int NotesArraySize) {
 void spreadOut(){
         for( int i = 0; i < this.arraySize; i++ ) {
                 println(i);
-                notes[i] = new Note(i*20,i*30, 40, 40);
+                notes[i] = new Note(i*20,30, 40, 40);
         }
 }
 void displayNotes() {

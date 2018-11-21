@@ -5,7 +5,7 @@ float x;
 float y;
 
 
-void makeNote(x,y){
+void makeNote(float temp_x,float temp_y){
 
 }
 

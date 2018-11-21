@@ -13,11 +13,11 @@ NoteManager(int NotesArraySize) {
 void spreadOut(){
         for( int i = 0; i < this.arraySize; i++ ) {
                 println(i);
-                notes[i] = new Note(i*20,30, 40, 40);
+                notes[i] = new Note(i*20,30, 40, 40, i);
                 // if (i == 0) {
                 //         notes[i].highlightNote(true, #000000);
                 // }
-                println(notes[i].highlightColor,notes[i].highlight );
+                println(notes[i].x);
         }
 }
 void displayNotes() {

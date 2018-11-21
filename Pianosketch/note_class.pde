@@ -33,40 +33,26 @@ void highlightNote(boolean temp_highlight, color temp_highlightColor){
 }
 
 }
+int pressed = 0;
+Void noteHit (){
+void mouseClicked() {
+if( pressed == 0) {
+pressed = 1;
+else {
+  pressed == 0;
 
+  if (pressed == 1 && mouseX >this.x && < noteWidth && mouseY > this.y && < noteHeight) {
+println(JA TJAAAAK);
 
-
-class NoteManager {
-int arraySize;
-Note[] notes;
-NoteManager(int NotesArraySize) {
-        arraySize = NotesArraySize;
-        notes = new Note[arraySize];
-        spreadOut();
-        // printArray(notes.highlightColor);
-}
-
-void spreadOut(){
-        for( int i = 0; i < this.arraySize; i++ ) {
-                println(i);
-                notes[i] = new Note(i*20,30, 40, 40);
-                if (i == 0) {
-                        println("tasss");
-                        notes[i].highlightNote(true, #000000);
-                }
-                println(notes[i].highlightColor,notes[i].highlight );
-        }
-}
-void displayNotes() {
-        for( int i = 0; i < this.arraySize; i++ ) {
-                notes[i].drawNote();
-        }
-}
-
-void loadChunk(int[] chunk)  {
-  for ( int i = 0; i < chunk.arrayLength; i++) {
-    println(chunk[i]);
   }
 }
+}
 
 }
+
+}
+// if (whereuat == "crossway" && mouseX > (ClabsPosX - (ClabsWidth/2)) && mouseX < (ClabsPosX + (ClabsWidth/2))
+//   && mouseY > (ClabsPosY - (ClabsHeight/2)) && mouseY < (ClabsPosY + (ClabsHeight/2))) {
+//   println("Labs");
+//   stream.load(bridgeStream, "labs");
+// }

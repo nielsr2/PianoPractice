@@ -11,3 +11,9 @@ void makeNote(float temp_x,float temp_y){
 
 
 }
+
+
+
+class NoteManager {
+
+}

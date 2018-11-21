@@ -16,7 +16,8 @@ Note(float temp_x,float temp_y, float temp_width, float temp_height){
 
 }
 void drawNote(){
-  rect(this.x,this.y,this.noteWidth,this.noteHeight); 
+  fill(255,0,0,100);
+  rect(this.x,this.y,this.noteWidth,this.noteHeight);
 }
 
 }

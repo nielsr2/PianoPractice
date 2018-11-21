@@ -8,12 +8,13 @@ void setup() {
 size(1000,1000);
 
 img = loadImage("assets/piano.jpg");
+testManager.spreadOut();
 
 }
 
 void draw(){
 image(img,0,400);
 testNote.drawNote();
-
+testManager.displayNotes();
 
 }

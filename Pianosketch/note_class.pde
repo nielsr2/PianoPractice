@@ -28,12 +28,21 @@ Note[] notes;
 NoteManager(int NotesArraySize) {
         arraySize = NotesArraySize;
         notes = new Note[arraySize];
-        spreadOut(arraySize);
+        spreadOut();
         printArray(notes);
 }
 
-void spreadOut(int amount){
-
+void spreadOut(){
+        for( int i = 0; i < this.arraySize; i++ ) {
+                println(i);
+                notes[i] = new Note(i*20,i*30, 40, 40);
+        }
 }
+        void displayNotes() {
+                for( int i = 0; i < this.arraySize; i++ ) {
+                        notes[i].drawNote();
+                }
+        }
+
 
 }

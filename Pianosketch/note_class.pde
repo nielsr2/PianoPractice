@@ -38,11 +38,11 @@ void spreadOut(){
                 notes[i] = new Note(i*20,i*30, 40, 40);
         }
 }
-        void displayNotes() {
-                for( int i = 0; i < this.arraySize; i++ ) {
-                        notes[i].drawNote();
-                }
+void displayNotes() {
+        for( int i = 0; i < this.arraySize; i++ ) {
+                notes[i].drawNote();
         }
+}
 
 
 }

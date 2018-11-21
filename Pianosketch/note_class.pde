@@ -5,7 +5,7 @@ float x;
 float y;
 float noteWidth;
 float noteHeight;
-int keyValue; 
+int keyValue;
 
 Note(float temp_x,float temp_y, float temp_width, float temp_height){
         this.x = temp_x;
@@ -63,5 +63,10 @@ void displayNotes() {
         }
 }
 
+void loadChunk(int[] chunk)  {
+  for ( int i = 0; i < chunk.arrayLength; i++) {
+    println(chunk[i]);
+  }
+}
 
 }

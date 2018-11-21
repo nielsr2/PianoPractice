@@ -16,5 +16,5 @@ void draw(){
 image(img,0,400);
 // testNote.drawNote();
 testManager.displayNotes();
-
+testManager.loadChunk(chunk1);
 }

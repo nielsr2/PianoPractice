@@ -1,5 +1,9 @@
 class Note {
-color col;
+color highlightColor;
+PImage overlay;
+float x;
+float y;
+
 
 void makeNote(x,y){
 

@@ -5,6 +5,7 @@ float x;
 float y;
 float noteWidth;
 float noteHeight;
+boolean hightlight;
 
 Note(float temp_x,float temp_y, float temp_width, float temp_height){
         this.x = temp_x;

@@ -2,17 +2,17 @@ import themidibus.*;
 
 PImage img;
 boolean DEBUG = true;
-// Midibus myKeyboard;
+MidiBus myKeyboard;
 // Note testNote = new Note(20,30,40,50);
 
 NoteManager testManager = new NoteManager(24);
 void setup() {
         size(1000,1000);
-        // Midibus.list();
-        // myKeyboard = new Midibus(this,0,1);
+        MidiBus.list();
+        myKeyboard = new MidiBus(this,0,1); // parent, input, output (see console for listed midi in/outs) // http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html
         img = loadImage("assets/piano2.png");
         testManager.spreadOut();
-        testManager.loadChunk(chunk1);
+        testManager.loadChunk("assets/chunk1.csv");
 }
 
 void draw(){
@@ -23,7 +23,12 @@ void draw(){
         testManager.displayNotes();
 
 }
-void mousePressed(){
-        // println("asdfasdf");
+void mouseClicked(){
+        testManager.click(mouseX, mouseY);
 
 };
+
+void controllerChange(int channel, int number, int value) {
+        // Here we print the controller number.
+        println(number);
+}

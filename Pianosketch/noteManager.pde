@@ -15,7 +15,7 @@ NoteManager(int notesArraySize, int noteValueOffset) {
 }
 void playTone(int keyValue){
         // http://newt.phys.unsw.edu.au/jw/notes.html
-        float test = float(keyValue);
+        float test = float(keyValue + this.valueOffset);
 
         // float freq = 2.^((this.keyValue-69)/12)*440.;
         float freq = pow(2,(test-69)/12);
@@ -29,23 +29,65 @@ void playTone(int keyValue){
         // SINE.stop();
 }
 void playChunk(){
+        countTimer = 0;
+        noteTimer.setEnabled(true);
         for( int i = 0; i < currentChunk.length; i++ ) {
                 this.playTone(currentChunk[i]);
                 notes[currentChunk[i] - valueOffset].animateNote();
-                delay(300);
+                // delay(300);
+
 
         }
 }
 
 void spreadOut(){
-        for( int i = 0; i < this.arraySize; i++ ) {
-                
-                notes[i] = new Note(i*20,30, 20, 40, valueOffset + i);
+  println("width:", width/(this.arraySize-15));
+  int offsetCount = 0;
+  int offsetSharpCount = 0;
+  float noteHeight = 300;
+  float noteWidth = width/float(this.arraySize-15);
+        for( int i = 0 ; i < this.arraySize; i++ ) {
+
+                int step = (i + 1) % 12;
+                println(step);
+
+                if (step == 2 ||
+                    step == 4 ||
+                    step ==7 ||
+                    step == 9 ||
+                    step == 11 ) {
+                        println("exception");
+                        notes[i ] = new Note(offsetSharpCount*(noteWidth/2) + (noteWidth/4),height/3, noteWidth/2, noteHeight*0.6, valueOffset + i, true);
+                        if (step == 4) {
+                          offsetSharpCount++;
+                        }
+                        if (step == 11) {
+                          offsetSharpCount++;
+                        }
+                        offsetSharpCount++;
+
+                }
+                else {
+
+
+                        notes[i] = new Note(offsetCount*((width/float(this.arraySize-15) )),
+                        height/3, noteWidth , noteHeight, valueOffset + i, false);
+                        offsetCount++;
+                        offsetSharpCount++;
+                }
         }
+
 }
-void displayNotes() {
+void displayNotes(boolean displayAll) {
         for( int i = 0; i < this.arraySize; i++ ) {
-                notes[i].drawNote();
+                if (displayAll) {
+                        notes[i].drawNote();
+                }
+                else if (!displayAll) {
+                        if (notes[i].active) {
+                                notes[i].drawNote();
+                        }
+                }
         }
 }
 int[] currentChunk;
@@ -119,5 +161,13 @@ void keyPressed() {
         if (key == TAB) {
                 println("YASS");
                 testManager.playChunk();
+        }
+        if (key == ENTER) {
+                // println("YASS");
+                for( int i = 0; i < testManager.arraySize; i++ ) {
+
+                        println(i, testManager.notes[i].highlightOpacity);
+                }
+
         }
 }

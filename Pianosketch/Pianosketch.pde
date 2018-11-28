@@ -22,7 +22,7 @@ void setup() {
 
         img = loadImage("assets/piano2.png");
         img.resize(width,0);
-        
+
         testManager.spreadOut();
         testManager.loadChunk("assets/chunkAll.csv");
         SINE = new SinOsc(this);
@@ -59,18 +59,11 @@ void timedPlaying(){
                 testManager.playTone(testManager.currentChunk[countTimer]);
                 testManager.notes[testManager.currentChunk[countTimer] - testManager.valueOffset].animateNote();
                 countTimer++;
-                // testManager.notes[(testManager.currentChunk[countTimer] - testManager.valueOffset)].animateNote();
+  
         }
         else {
                 noteTimer.setEnabled(false);
                 // println("noppppe");
         }
-        // for( int i = 0; i < currentChunk.length; i++ ) {
-        //         this.playTone(currentChunk[i]);
-        //         notes[currentChunk[i] - valueOffset].animateNote();
-        //         // delay(300);
-        //
-        //
-        // }
-//}
+
 }

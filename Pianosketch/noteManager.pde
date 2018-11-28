@@ -25,19 +25,10 @@ void playTone(int keyValue){
         SINE.set(freq,0.5,0.0,1);
         SINE.play();
         ENV.play(SINE,0.1,0.004,0.3,0.4);
-        // delay(250);
-        // SINE.stop();
 }
 void playChunk(){
         countTimer = 0;
         noteTimer.setEnabled(true);
-        //for( int i = 0; i < currentChunk.length; i++ ) {
-        //        this.playTone(currentChunk[i]);
-        //        // notes[currentChunk[i] - valueOffset].animateNote();
-        //        // delay(300);
-
-
-        //}
 }
 
 void spreadOut(){
@@ -77,19 +68,6 @@ void spreadOut(){
         }
 
 }
-// void displayNotes(boolean displayAll) {
-//         for( int i = 0; i < this.arraySize; i++ ) {
-//                 if (displayAll) {
-//                         notes[i].drawNote();
-//                 }
-//                 else if (!displayAll) {
-//                         if (notes[i].active) {
-//                                 notes[i].drawNote();
-//                         }
-//                 }
-//         }
-// }
-
 void displayNotes(boolean displayAll) {
         if (displayAll) {
                 for( int i = 0; i < this.arraySize; i++ ) {

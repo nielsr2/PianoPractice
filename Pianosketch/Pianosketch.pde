@@ -14,7 +14,7 @@ MidiBus myKeyboard;
 SinOsc SINE;
 Env ENV;
 NoteManager testManager = new NoteManager(36, 24);
-
+Staff staff;
 TimedEventGenerator noteTimer;
 int countTimer = 0;
 void setup() {
@@ -22,23 +22,26 @@ void setup() {
 
         img = loadImage("assets/piano2.png");
         img.resize(width,0);
-        imageMode(CENTER);
+        
         testManager.spreadOut();
         testManager.loadChunk("assets/chunkAll.csv");
         SINE = new SinOsc(this);
         ENV = new Env(this);
-        noteTimer = new TimedEventGenerator(this,"onTimerEvent2", false);
-        noteTimer.setIntervalMs(250);
+        noteTimer = new TimedEventGenerator(this,"timedPlaying", false);
+        noteTimer.setIntervalMs(500);
         // float freq = 2^((52-69)/12)*440;
         // println(freq);
         //
         // sine.set(freq,0.5,0.0,1);
         // sine.play();
         testManager.displayNotes(true);
+        staff = new Staff(float(width/4*3), 0.);
 }
 
 void draw(){
         // TODO setup pic properly
+        staff.drawStaff();
+        imageMode(CENTER);
         image(img,width/2,height/2);
         testManager.displayNotes(true);
 
@@ -49,14 +52,14 @@ void mouseClicked(){
 };
 
 
-void onTimerEvent2(){
+void timedPlaying(){
         println("countTimer: ",countTimer, "testManager.currentChunk.length: ", testManager.currentChunk.length);
-        if (countTimer < testManager.currentChunk.length) {
+        if (countTimer < (testManager.currentChunk.length - 1)) {
                 // println("yup");
                 testManager.playTone(testManager.currentChunk[countTimer]);
                 testManager.notes[testManager.currentChunk[countTimer] - testManager.valueOffset].animateNote();
                 countTimer++;
-                testManager.notes[(testManager.currentChunk[countTimer] - testManager.valueOffset)].animateNote();
+                // testManager.notes[(testManager.currentChunk[countTimer] - testManager.valueOffset)].animateNote();
         }
         else {
                 noteTimer.setEnabled(false);

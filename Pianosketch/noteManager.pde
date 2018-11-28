@@ -31,16 +31,17 @@ void playTone(int keyValue){
 void playChunk(){
         countTimer = 0;
         noteTimer.setEnabled(true);
-        for( int i = 0; i < currentChunk.length; i++ ) {
-                this.playTone(currentChunk[i]);
-                notes[currentChunk[i] - valueOffset].animateNote();
-                // delay(300);
+        //for( int i = 0; i < currentChunk.length; i++ ) {
+        //        this.playTone(currentChunk[i]);
+        //        // notes[currentChunk[i] - valueOffset].animateNote();
+        //        // delay(300);
 
 
-        }
+        //}
 }
 
 void spreadOut(){
+        // TODO FIX THE MAGIC NUMBER 15 ( 5 sharps per octave, over 3 octaves, 15)
         println("width:", width/(this.arraySize-15));
         int offsetCount = 0;
         int offsetSharpCount = 0;
@@ -68,9 +69,7 @@ void spreadOut(){
 
                 }
                 else {
-
-
-                        notes[i] = new Note(offsetCount*((width/float(this.arraySize-15) )),
+                        notes[i] = new Note(offsetCount*((width/float(this.arraySize-15))),
                                             height/3, noteWidth, noteHeight, valueOffset + i, false);
                         offsetCount++;
                         offsetSharpCount++;
@@ -119,7 +118,7 @@ void loadChunk(String csvfile)  {
                 // set the 'chunk' for managing
                 currentChunk[i] = chunk.getInt(i, "value");
         }
-        // printArray(currentChunk);
+        printArray(currentChunk);
 }
 // when note is pressed, this is called to check if it's the correct note in the sequence)
 boolean isNextNote(int noteValue) {
@@ -141,18 +140,26 @@ boolean isNextNote(int noteValue) {
         }
 }
 void click(float x, float y) {
-  for( int i = 0; i < this.arraySize; i++ ) {
-          if (!notes[i].isSharp)
-          {
-            println("yess, playing natural");
-            notes[i].checkClick(x,y);}
-  }
+        boolean found = false;
         for( int i = 0; i < this.arraySize; i++ ) {
                 if (notes[i].isSharp)
                 {
-println("yess, playing sharp");
-                  notes[i].checkClick(x,y);}
+                        // println("yess, playing natural");
+                        if (notes[i].checkClick(x,y)) {
+                                found = true;
+                        }
+                        ;
+                }
+        }
+        if (!found) {
+                for( int i = 0; i < this.arraySize; i++ ) {
+                        if (!notes[i].isSharp)
+                        {
+// println("yess, playing sharp");
+                                notes[i].checkClick(x,y);
+                        }
 
+                }
         }
 
 }
@@ -193,7 +200,6 @@ void keyPressed() {
         if (key == ENTER) {
                 // println("YASS");
                 for( int i = 0; i < testManager.arraySize; i++ ) {
-
                         println(i, testManager.notes[i].highlightOpacity);
                 }
 

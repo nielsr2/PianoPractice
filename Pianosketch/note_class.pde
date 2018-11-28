@@ -40,8 +40,8 @@ void playTone(){
 float highlightOpacity = 100;
 boolean animate = false;
 void animateNote(){
-  animate = true;
-  println("tast");
+  this.animate = true;
+  // println("tast");
   this.highlightOpacity = 255.;
   // while (this.highlightOpacity >= 0. ){
   //
@@ -52,15 +52,16 @@ void animateNote(){
 boolean isSharp = true;
 void drawNote(){
         stroke(0);
-        if (animate) {
+        if (this.animate) {
+
+          this.highlightOpacity += -10.;
+          println("this.highlightOpacity: ", this.highlightOpacity);
           if (this.highlightOpacity < 100){
-            println("opca test");
+
             animate = false;
           }
-          this.highlightOpacity -= -10;
 
         }
-
         fill(this.highlightColor, this.highlightOpacity);
         if (isSharp) {
           // stroke(255,0,0);

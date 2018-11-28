@@ -89,7 +89,7 @@ void loadChunk(String csvfile)  {
         Table chunk = loadTable(csvfile, "header"); // header, cuz our csv-files has headers (value, finger)
         currentChunk = new int[chunk.getRowCount()];
         for ( int i = 0; i < chunk.getRowCount(); i++) {
-                println(chunk.getInt(i,0), chunk.getInt(i,1));
+                //println(chunk.getInt(i,0), chunk.getInt(i,1));
 
                 // set notes
                 notes[chunk.getInt(i, "value") - valueOffset].highlightNote(true, this.fingerColor(chunk.getInt(i,1)));

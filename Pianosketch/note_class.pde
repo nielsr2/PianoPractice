@@ -1,12 +1,12 @@
 class Note {
-
-PImage overlay;
+PImage overlay; // not used;
 float x;
 float y;
 float noteWidth;
 float noteHeight;
 int keyValue;
 boolean active = false;
+boolean isSharp = true;
 // SinOsc sine;
 Note(float temp_x,float temp_y, float temp_width, float temp_height, int temp_keyValue, boolean sharp){
         this.x = temp_x;
@@ -15,57 +15,46 @@ Note(float temp_x,float temp_y, float temp_width, float temp_height, int temp_ke
         this.noteHeight = temp_height;
         this.keyValue =  temp_keyValue;
         this.isSharp = sharp;
-        // sine = new SinOsc(PApplet);
-
-        // this.drawNote();
 }
 
 void playTone(){
-  // http://newt.phys.unsw.edu.au/jw/notes.html
-  float test = float(this.keyValue + noteManager.valueOffset);
-  println(2^(this.keyValue-69/12));
-  // float freq = 2.^((this.keyValue-69)/12)*440.;
-  float freq = pow(2,(test-69)/12);
-  freq = freq*440.;
-  println(freq, keyValue);
+        // http://newt.phys.unsw.edu.au/jw/notes.html
+        // TODO make freq a object property, so it's not calculated every damn time
+        // TODO also, playTone from MAnager or note???? not even sure what it does now...
+        float test = float(this.keyValue + noteManager.valueOffset);
+        println(2^(this.keyValue-69/12));
+        // float freq = 2.^((this.keyValue-69)/12)*440.;
+        float freq = pow(2,(test-69)/12);
+        freq = freq*440.;
+        println(freq, keyValue);
 
-  SINE.set(freq,0.5,0.0,1);
-  SINE.play();
-  ENV.play(SINE,0.01,0.004,0.2,0.2);
-    // env.play(triOsc, attackTime, sustainTime, sustainLevel, releaseTime);
-  // delay(250);
-  // SINE.stop();
+        SINE.set(freq,0.5,0.0,1);
+        SINE.play();
+        ENV.play(SINE,0.01,0.004,0.2,0.2);
+        // env.play(triOsc, attackTime, sustainTime, sustainLevel, releaseTime);
 }
 
 float highlightOpacity = 100;
 boolean animate = false;
 void animateNote(){
-  this.animate = true;
-  // println("tast");
-  this.highlightOpacity = 255.;
-  // while (this.highlightOpacity >= 0. ){
-  //
-  //   this.highlightOpacity = this.highlightOpacity - 10;
-  //   // println("highlightOpacity: ", this.highlightOpacity, "value: ", this.keyValue );
-  // }
+        this.animate = true;
+        this.highlightOpacity = 255.;
 }
-boolean isSharp = true;
+
+
 void drawNote(){
         stroke(0);
         if (this.animate) {
-
-          this.highlightOpacity += -10.;
-          println("this.highlightOpacity: ", this.highlightOpacity);
-          if (this.highlightOpacity < 100){
-
-            animate = false;
-          }
-
+                this.highlightOpacity += -10.;
+                // println("this.highlightOpacity: ", this.highlightOpacity);
+                if (this.highlightOpacity < 100) {
+                        animate = false;
+                }
         }
         fill(this.highlightColor, this.highlightOpacity);
         if (isSharp) {
-          // stroke(255,0,0);
-          fill(#000000, this.highlightOpacity);
+                // stroke(255,0,0);
+                fill(#000000, this.highlightOpacity);
         }
         if (this.highlight) {
                 fill(this.highlightColor,this.highlightOpacity);
@@ -82,19 +71,17 @@ void highlightNote(boolean temp_highlight, int temp_highlightColor){
         this.highlightColor = temp_highlightColor;
 }
 
-// called from noteManager thru loop.
+// called from noteManager using a for loop on notes array.
 boolean checkClick(float mouse_x, float mouse_y){
-        // mouse_x = int(mouse_x);
-        // mouse_y = int(mouse_y);
         if (mouse_x > this.x && mouse_x < (this.x + this.noteWidth) && mouse_y > this.y && mouse_y < this.y + (this.noteHeight) ) {
-                println(this.keyValue);
+                // println("key hit, value was ", this.keyValue);
                 this.playTone();
-                 this.animateNote();
+                this.animateNote();
                 noteManager.isNextNote(this.keyValue);
                 return true;
         }
         else {
-          return false;
+                return false;
         }
 }
 

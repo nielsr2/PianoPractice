@@ -22,7 +22,7 @@ Note(float temp_x,float temp_y, float temp_width, float temp_height, int temp_ke
 
 void playTone(){
   // http://newt.phys.unsw.edu.au/jw/notes.html
-  float test = float(this.keyValue + testManager.valueOffset);
+  float test = float(this.keyValue + noteManager.valueOffset);
   println(2^(this.keyValue-69/12));
   // float freq = 2.^((this.keyValue-69)/12)*440.;
   float freq = pow(2,(test-69)/12);
@@ -90,7 +90,7 @@ boolean checkClick(float mouse_x, float mouse_y){
                 println(this.keyValue);
                 this.playTone();
                  this.animateNote();
-                testManager.isNextNote(this.keyValue);
+                noteManager.isNextNote(this.keyValue);
                 return true;
         }
         else {

@@ -1,69 +1,64 @@
-// TODO make sharps into a separate array ( or otherwise differentiate ) and check that for clicks first
+// TODONE make sharps into a separate array ( or otherwise differentiate ) and check that for clicks first √ works now
 // TODO implement noloop, to reduce cpu.
 
+// LIBRARIES we use
+import org.multiply.processing.*; // for event timer
+import processing.sound.*; // playing sound
+import themidibus.*; // MidiBus
 
-import org.multiply.processing.*;
+PImage pianoBackground;
 
-import processing.sound.*;
-
-import themidibus.*;
-PImage img;
-boolean DEBUG = true;
 MidiBus myKeyboard;
-// Note testNote = new Note(20,30,40,50);
+
 SinOsc SINE;
 Env ENV;
-NoteManager testManager = new NoteManager(36, 24);
+
+NoteManager noteManager = new NoteManager(36, 24);
 Staff staff;
+
 TimedEventGenerator noteTimer;
-int countTimer = 0;
+int timerCount = 0;
 void setup() {
         size(1000,1000);
 
-        img = loadImage("assets/piano2.png");
-        img.resize(width,0);
+        pianoBackground = loadImage("assets/piano2.png");
+        pianoBackground.resize(width,0);
 
-        testManager.spreadOut();
-        testManager.loadChunk("assets/chunkAll.csv");
+        noteManager.spreadOut();
+        noteManager.loadChunk("assets/chunk1.csv");
+
         SINE = new SinOsc(this);
         ENV = new Env(this);
+
         noteTimer = new TimedEventGenerator(this,"timedPlaying", false);
         noteTimer.setIntervalMs(500);
-        // float freq = 2^((52-69)/12)*440;
-        // println(freq);
-        //
-        // sine.set(freq,0.5,0.0,1);
-        // sine.play();
-        testManager.displayNotes(true);
-        staff = new Staff(float(width/4*3), 0.);
+        noteManager.displayNotes(true);
+        staff = new Staff(50., 200);
 }
 
 void draw(){
         // TODO setup pic properly
         staff.drawStaff();
         imageMode(CENTER);
-        image(img,width/2,height/2);
-        testManager.displayNotes(true);
+        image(pianoBackground,width/2,height/2);
+        noteManager.displayNotes(true);
 
 }
 void mouseClicked(){
-        testManager.click(mouseX, mouseY);
-
+        noteManager.click(mouseX, mouseY);
 };
 
 
 void timedPlaying(){
-        println("countTimer: ",countTimer, "testManager.currentChunk.length: ", testManager.currentChunk.length);
-        if (countTimer < (testManager.currentChunk.length - 1)) {
-                // println("yup");
-                testManager.playTone(testManager.currentChunk[countTimer]);
-                testManager.notes[testManager.currentChunk[countTimer] - testManager.valueOffset].animateNote();
-                countTimer++;
-  
+        println("timerCount: ",timerCount, "noteManager.currentChunk.length: ", noteManager.currentChunk.length);
+        if (timerCount < (noteManager.currentChunk.length - 1)) {
+                // println("playing note in chunk, count is ", timerCount);
+                noteManager.playTone(noteManager.currentChunk[timerCount]);
+                noteManager.notes[noteManager.currentChunk[timerCount] - noteManager.valueOffset].animateNote();
+                timerCount++;
         }
         else {
                 noteTimer.setEnabled(false);
-                // println("noppppe");
+                // println("chunk empty, timer stopped");
         }
-
 }

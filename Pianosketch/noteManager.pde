@@ -27,7 +27,7 @@ void playTone(int keyValue){
         ENV.play(SINE,0.1,0.004,0.3,0.4);
 }
 void playChunk(){
-        countTimer = 0;
+        timerCount = 0;
         noteTimer.setEnabled(true);
 }
 
@@ -173,12 +173,12 @@ void controllerChange(int channel, int number, int value) {
 void keyPressed() {
         if (key == TAB) {
                 println("YASS");
-                testManager.playChunk();
+                noteManager.playChunk();
         }
         if (key == ENTER) {
                 // println("YASS");
-                for( int i = 0; i < testManager.arraySize; i++ ) {
-                        println(i, testManager.notes[i].highlightOpacity);
+                for( int i = 0; i < noteManager.arraySize; i++ ) {
+                        println(i, noteManager.notes[i].highlightOpacity);
                 }
 
         }

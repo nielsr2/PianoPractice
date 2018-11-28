@@ -1,3 +1,7 @@
+// TODO make sharps into a separate array ( or otherwise differentiate ) and check that for clicks first
+// TODO implement noloop, to reduce cpu.
+
+
 import org.multiply.processing.*;
 
 import processing.sound.*;
@@ -48,7 +52,7 @@ void mouseClicked(){
 void onTimerEvent2(){
         println("countTimer: ",countTimer, "testManager.currentChunk.length: ", testManager.currentChunk.length);
         if (countTimer < testManager.currentChunk.length) {
-                println("yup");
+                // println("yup");
                 testManager.playTone(testManager.currentChunk[countTimer]);
                 testManager.notes[testManager.currentChunk[countTimer] - testManager.valueOffset].animateNote();
                 countTimer++;
@@ -56,7 +60,7 @@ void onTimerEvent2(){
         }
         else {
                 noteTimer.setEnabled(false);
-                println("noppppe");
+                // println("noppppe");
         }
         // for( int i = 0; i < currentChunk.length; i++ ) {
         //         this.playTone(currentChunk[i]);

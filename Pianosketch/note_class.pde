@@ -38,18 +38,28 @@ void playTone(){
 }
 
 float highlightOpacity = 100;
+boolean animate = false;
 void animateNote(){
+  animate = true;
   println("tast");
   this.highlightOpacity = 255.;
-  while (this.highlightOpacity >= 0. ){
-    println("GRRRR");
-    this.highlightOpacity = this.highlightOpacity - 10;
-    // println("highlightOpacity: ", this.highlightOpacity, "value: ", this.keyValue );
-  }
+  // while (this.highlightOpacity >= 0. ){
+  //
+  //   this.highlightOpacity = this.highlightOpacity - 10;
+  //   // println("highlightOpacity: ", this.highlightOpacity, "value: ", this.keyValue );
+  // }
 }
 boolean isSharp = true;
 void drawNote(){
         stroke(0);
+        if (animate) {
+          if (this.highlightOpacity < 100){
+            println("opca test");
+            animate = false;
+          }
+          this.highlightOpacity -= -10;
+
+        }
 
         fill(this.highlightColor, this.highlightOpacity);
         if (isSharp) {

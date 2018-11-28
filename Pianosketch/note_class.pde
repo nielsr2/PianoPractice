@@ -82,7 +82,7 @@ void highlightNote(boolean temp_highlight, int temp_highlightColor){
 }
 
 // called from noteManager thru loop.
-void checkClick(float mouse_x, float mouse_y){
+boolean checkClick(float mouse_x, float mouse_y){
         // mouse_x = int(mouse_x);
         // mouse_y = int(mouse_y);
         if (mouse_x > this.x && mouse_x < (this.x + this.noteWidth) && mouse_y > this.y && mouse_y < this.y + (this.noteHeight) ) {
@@ -90,6 +90,10 @@ void checkClick(float mouse_x, float mouse_y){
                 this.playTone();
                  this.animateNote();
                 testManager.isNextNote(this.keyValue);
+                return true;
+        }
+        else {
+          return false;
         }
 }
 

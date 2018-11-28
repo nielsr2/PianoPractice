@@ -41,12 +41,12 @@ void playChunk(){
 }
 
 void spreadOut(){
-  println("width:", width/(this.arraySize-15));
-  int offsetCount = 0;
-  int offsetSharpCount = 0;
-  float noteHeight = 300;
-  float noteWidth = width/float(this.arraySize-15);
-        for( int i = 0 ; i < this.arraySize; i++ ) {
+        println("width:", width/(this.arraySize-15));
+        int offsetCount = 0;
+        int offsetSharpCount = 0;
+        float noteHeight = 300;
+        float noteWidth = width/float(this.arraySize-15);
+        for( int i = 0; i < this.arraySize; i++ ) {
 
                 int step = (i + 1) % 12;
                 println(step);
@@ -59,10 +59,10 @@ void spreadOut(){
                         println("exception");
                         notes[i ] = new Note(offsetSharpCount*(noteWidth/2) + (noteWidth/4),height/3, noteWidth/2, noteHeight*0.6, valueOffset + i, true);
                         if (step == 4) {
-                          offsetSharpCount++;
+                                offsetSharpCount++;
                         }
                         if (step == 11) {
-                          offsetSharpCount++;
+                                offsetSharpCount++;
                         }
                         offsetSharpCount++;
 
@@ -71,20 +71,37 @@ void spreadOut(){
 
 
                         notes[i] = new Note(offsetCount*((width/float(this.arraySize-15) )),
-                        height/3, noteWidth , noteHeight, valueOffset + i, false);
+                                            height/3, noteWidth, noteHeight, valueOffset + i, false);
                         offsetCount++;
                         offsetSharpCount++;
                 }
         }
 
 }
+// void displayNotes(boolean displayAll) {
+//         for( int i = 0; i < this.arraySize; i++ ) {
+//                 if (displayAll) {
+//                         notes[i].drawNote();
+//                 }
+//                 else if (!displayAll) {
+//                         if (notes[i].active) {
+//                                 notes[i].drawNote();
+//                         }
+//                 }
+//         }
+// }
+
 void displayNotes(boolean displayAll) {
-        for( int i = 0; i < this.arraySize; i++ ) {
-                if (displayAll) {
-                        notes[i].drawNote();
+        if (displayAll) {
+                for( int i = 0; i < this.arraySize; i++ ) {
+                        if(!notes[i].isSharp)
+                        {
+                                notes[i].drawNote();
+                        }
                 }
-                else if (!displayAll) {
-                        if (notes[i].active) {
+                for( int i = 0; i < this.arraySize; i++ ) {
+                        if(notes[i].isSharp)
+                        {
                                 notes[i].drawNote();
                         }
                 }
@@ -124,9 +141,20 @@ boolean isNextNote(int noteValue) {
         }
 }
 void click(float x, float y) {
+  for( int i = 0; i < this.arraySize; i++ ) {
+          if (!notes[i].isSharp)
+          {
+            println("yess, playing natural");
+            notes[i].checkClick(x,y);}
+  }
         for( int i = 0; i < this.arraySize; i++ ) {
-                notes[i].checkClick(x,y);
+                if (notes[i].isSharp)
+                {
+println("yess, playing sharp");
+                  notes[i].checkClick(x,y);}
+
         }
+
 }
 // function for interpreting int for finger from CSV to colour
 int fingerColor(int finger){

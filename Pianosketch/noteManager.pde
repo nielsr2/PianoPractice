@@ -9,8 +9,8 @@ NoteManager(int notesArraySize, int noteValueOffset) {
         spreadOut();
         printArray(notes);
         valueOffset = noteValueOffset;
-        // MidiBus.list();
-        // myKeyboard = new MidiBus(this,0,1); // parent, input, output (see console for listed midi in/outs) // http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html
+        MidiBus.list();
+        myKeyboard = new MidiBus(this,0,1); // parent, input, output (see console for listed midi in/outs) // http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html
         // printArray(notes  .highlightColor);
 }
 void playTone(int keyValue){
@@ -86,15 +86,15 @@ void displayNotes(boolean displayAll) {
 }
 int[] currentChunk;
 void loadChunk(String csvfile)  {
-        Table chunk = loadTable(csvfile, "header"); // header, cuz our csv-files has headers (value, finger)
-        currentChunk = new int[chunk.getRowCount()];
-        for ( int i = 0; i < chunk.getRowCount(); i++) {
-                //println(chunk.getInt(i,0), chunk.getInt(i,1));
+        Table chunkFromCSV = loadTable(csvfile, "header"); // header, cuz our csv-files has headers (value, finger)
+        currentChunk = new int[chunkFromCSV.getRowCount()];
+        for ( int i = 0; i < chunkFromCSV.getRowCount(); i++) {
+                //println(chunkFromCSV.getInt(i,0), chunk.getInt(i,1));
 
                 // set notes
-                notes[chunk.getInt(i, "value") - valueOffset].highlightNote(true, this.fingerColor(chunk.getInt(i,1)));
-                // set the 'chunk' for managing
-                currentChunk[i] = chunk.getInt(i, "value");
+                notes[chunkFromCSV.getInt(i, "value") - valueOffset].highlightNote(true, this.fingerColor(chunkFromCSV.getInt(i,1)));
+                // set the 'chunkFromCSV' for managing
+                currentChunk[i] = chunkFromCSV.getInt(i, "value");
         }
         printArray(currentChunk);
 }

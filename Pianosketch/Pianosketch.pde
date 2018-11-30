@@ -4,11 +4,11 @@
 // LIBRARIES we use
 import org.multiply.processing.*; // for event timer
 import processing.sound.*; // playing sound
-// import themidibus.*; // MidiBus
+import themidibus.*; // MidiBus
 
 PImage pianoBackground;
 
-// MidiBus myKeyboard;
+MidiBus myKeyboard;
 
 SinOsc SINE;
 Env ENV;
@@ -25,9 +25,11 @@ void setup() {
         pianoBackground.resize(width,0);
 
         noteManager.spreadOut();
-        noteManager.loadChunk("assets/chunk1.csv");
+        noteManager.loadChunk("assets/chunkAll.csv");
 
+// INSTANCE OF THE SinOsc, which is a sine wave oscillator.
         SINE = new SinOsc(this);
+        // THIS, IS ENVELOPE = THE CONTROL OF VOLUME (DIGITAL AUDIO IS A LOT OF DIGITS BETWEEN -1. AND 1      , making the soundwaves. YOU CONTROL THE VOLUME BY MULTIPLYING THE WAVE FROM 0. ( NO SOUND) TO 1( ABOVE 1 THEN it's becoming larger than it originally was (these sine are prolly maxed out, but soundfiles might not)). the envelope part comes in, it's volume control over time. ASR, Attack, how  )
         ENV = new Env(this);
 
         noteTimer = new TimedEventGenerator(this,"timedPlaying", false);

@@ -118,6 +118,8 @@ boolean isNextNote(int noteValue) {
         }
 }
 void click(float x, float y) {
+
+  //  this whole if-shenanigan is about black keys vs white keys. Since black keys are above the white ones, we want to check those first cuz overlaps
         boolean found = false;
         for( int i = 0; i < this.arraySize; i++ ) {
                 if (notes[i].isSharp)

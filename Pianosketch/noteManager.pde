@@ -9,8 +9,8 @@ NoteManager(int notesArraySize, int noteValueOffset) {
         spreadOut();
         printArray(notes);
         valueOffset = noteValueOffset;
-        MidiBus.list();
-        myKeyboard = new MidiBus(this,0,1); // parent, input, output (see console for listed midi in/outs) // http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html
+        // MidiBus.list();
+        // myKeyboard = new MidiBus(this,0,1); // parent, input, output (see console for listed midi in/outs) // http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html
         // printArray(notes  .highlightColor);
 }
 void playTone(int keyValue){

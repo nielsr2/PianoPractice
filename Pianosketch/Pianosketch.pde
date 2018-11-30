@@ -4,11 +4,11 @@
 // LIBRARIES we use
 import org.multiply.processing.*; // for event timer
 import processing.sound.*; // playing sound
-import themidibus.*; // MidiBus
+// import themidibus.*; // MidiBus
 
 PImage pianoBackground;
 
-MidiBus myKeyboard;
+// MidiBus myKeyboard;
 
 SinOsc SINE;
 Env ENV;

@@ -108,7 +108,7 @@ boolean isNextNote(int noteValue) {
                 currentChunk = temp_currentChunk;
                 printArray(currentChunk);
                 if (currentChunk.length == 0) {
-                        println("array empty!!");
+                        println("array empty");
                         // TODO do something
                 }
                 return true;

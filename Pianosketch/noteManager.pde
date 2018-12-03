@@ -7,7 +7,7 @@ NoteManager(int notesArraySize, int noteValueOffset) {
         arraySize = notesArraySize;
         notes = new Note[arraySize];
         spreadOut();
-        printArray(notes);
+        // printArray(notes);
         valueOffset = noteValueOffset;
         MidiBus.list();
         myKeyboard = new MidiBus(this,0,1); // parent, input, output (see console for listed midi in/outs) // http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html
@@ -33,7 +33,7 @@ void playChunk(){
 
 void spreadOut(){
         // TODO FIX THE MAGIC NUMBER 15 ( 5 sharps per octave, over 3 octaves, 15)
-        println("width:", width/(this.arraySize-15));
+        // println("width:", width/(this.arraySize-15));
         int offsetCount = 0;
         int offsetSharpCount = 0;
         float noteHeight = 300;
@@ -41,14 +41,14 @@ void spreadOut(){
         for( int i = 0; i < this.arraySize; i++ ) {
 
                 int step = (i + 1) % 12;
-                println(step);
+                // println(step);
 
                 if (step == 2 ||
                     step == 4 ||
                     step ==7 ||
                     step == 9 ||
                     step == 11 ) {
-                        println("exception");
+                        // println("exception");
                         notes[i ] = new Note(offsetSharpCount*(noteWidth/2) + (noteWidth/4),height/3,
                          noteWidth/2, noteHeight*0.6, valueOffset + i, true);
                         if (step == 4) {
@@ -97,7 +97,7 @@ void loadChunk(String csvfile)  {
                 // set the 'chunkFromCSV' for managing
                 currentChunk[i] = chunkFromCSV.getInt(i, "value");
         }
-        printArray(currentChunk);
+        // printArray(currentChunk);
 }
 // when note is pressed, this is called to check if it's the correct note in the sequence)
 boolean isNextNote(int noteValue) {
@@ -107,7 +107,7 @@ boolean isNextNote(int noteValue) {
                         temp_currentChunk[i] = currentChunk[i];
                 }
                 currentChunk = temp_currentChunk;
-                printArray(currentChunk);
+                // printArray(currentChunk);
                 if (currentChunk.length == 0) {
                         println("array empty");
                         // TODO do something

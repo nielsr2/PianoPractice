@@ -1,4 +1,5 @@
 // https://atom.io/packages/processing
+
 class Note {
 PImage overlay; // not used;
 float x;
@@ -9,6 +10,7 @@ int keyValue;
 boolean active = false;
 boolean isSharp = true;
 // SinOsc sine;
+SoundFile sound;
 Note(float temp_x,float temp_y, float temp_width, float temp_height, int temp_keyValue, boolean sharp){
         this.x = temp_x;
         this.y = temp_y;
@@ -16,8 +18,10 @@ Note(float temp_x,float temp_y, float temp_width, float temp_height, int temp_ke
         this.noteHeight = temp_height;
         this.keyValue =  temp_keyValue;
         this.isSharp = sharp;
-}
+        this.sound = SoundFile(this, "bla/piano" + this.keyValue + ".mp3");
 
+}
+//
 void playTone(){
         // http://newt.phys.unsw.edu.au/jw/notes.html
         // TODO make freq a object property, so it's not calculated every damn time

@@ -14,11 +14,13 @@ SinOsc SINE;
 Env ENV;
 
 NoteManager noteManager = new NoteManager(36, 24);
+FlowManager flowManager;
 Staff staff;
 
 TimedEventGenerator noteTimer;
 int timerCount = 0;
 void setup() {
+        flowManager = new FlowManager(3);
         size(1000,1000);
 
         pianoBackground = loadImage("assets/piano2.png");

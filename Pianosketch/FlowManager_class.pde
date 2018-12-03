@@ -7,12 +7,13 @@ FlowManager(int howManyChunks){
                 String folder = "/assets/chunk";
                 String ext = ".csv";
                 String path = folder + (i + 1) + ext;
-
                 chunks[i] = path;
                 println(folder);
         }
         // printArray(this.chunks);
 }
+
+
 
 
 

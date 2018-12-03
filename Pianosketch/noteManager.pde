@@ -49,7 +49,8 @@ void spreadOut(){
                     step == 9 ||
                     step == 11 ) {
                         println("exception");
-                        notes[i ] = new Note(offsetSharpCount*(noteWidth/2) + (noteWidth/4),height/3, noteWidth/2, noteHeight*0.6, valueOffset + i, true);
+                        notes[i ] = new Note(offsetSharpCount*(noteWidth/2) + (noteWidth/4),height/3,
+                         noteWidth/2, noteHeight*0.6, valueOffset + i, true);
                         if (step == 4) {
                                 offsetSharpCount++;
                         }

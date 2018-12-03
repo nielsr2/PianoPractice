@@ -1,3 +1,4 @@
+// https://atom.io/packages/processing
 class Note {
 PImage overlay; // not used;
 float x;

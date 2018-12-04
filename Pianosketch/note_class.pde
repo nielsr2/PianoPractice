@@ -96,7 +96,8 @@ boolean checkClick(float mouse_x, float mouse_y){
                 // println("key hit, value was ", this.keyValue);
                 this.playTone();
                 this.animateNote();
-                noteManager.isNextNote(this.keyValue);
+                // noteManager.isNextNote(this.keyValue);
+                noteManager.isAnyNote(this.keyValue);
                 return true;
         }
         else {

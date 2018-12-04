@@ -87,11 +87,11 @@ void displayNotes(boolean displayAll) {
                 }
         }
         if (debug) {
-                String strCurrentChunk = join(nf(currentChunk, 0), ", ");
-                text(("manager - current chunk" + strCurrentChunk + ", arraySize" + arraySize + "offset: " + valueOffset), 0, 900);
+                // String strCurrentChunk = join(nf(currentChunk, 0), ", ");
+                text(("manager - current chunk" + currentChunk2 + ", arraySize" + arraySize + "offset: " + valueOffset), 0, 900);
         }
 }
-int[] currentChunk;
+
 IntList currentChunk2 = new IntList();
 void loadChunk(String csvfile)  {
         Table chunkFromCSV = loadTable(csvfile, "header"); // header, cuz our csv-files has headers (value, finger)
@@ -110,19 +110,8 @@ void loadChunk(String csvfile)  {
 }
 // when note is pressed, this is called to check if it's the correct note in the sequence)
 boolean isNextNote(int noteValue) {
-        // if (noteValue == currentChunk[0]) {
+
         if (noteValue == currentChunk2.get(0)) {
-                // println("yassss noteval was ", noteValue + " and chunk0 was", currentChunk[0], "length", currentChunk.length );
-                // int[] temp_currentChunk = new int[currentChunk.length - 1];
-                // for ( int i = 0; i < (temp_currentChunk.length ); i++) {
-                //         temp_currentChunk[i] = currentChunk[i + 1];
-                // }
-                // currentChunk = temp_currentChunk;
-                // // printArray(currentChunk);
-                // if (currentChunk.length == 0) {
-                //         println("array empty");
-                //         // TODO do something
-                // }
                 currentChunk2.remove(0);
                 if (currentChunk2.size() == 0) {
                         println("array empty");
@@ -135,16 +124,19 @@ boolean isNextNote(int noteValue) {
         }
 }
 
-// boolean isAnyNote(int noteValue) {
-//
-//   for (int i = 0; i < currentChunk.length; i++ ) {
-//     if (notevalue == currentChunk[i]){
-//        // int[] temp_currentChunk = new int[currentChunk.length - 1];
-//        int[] front = subset(currentChunk, 0, i - 1);
-//        int[] end = subset(currentChunk, i, currentChunk.length - i);
-//     }
-//   }
-// }
+boolean isAnyNote(int noteValue) {
+
+  for (int i = 0; i < currentChunk2.size(); i++ ) {
+    if (noteValue == currentChunk2.get(i)){
+      currentChunk2.remove(i);
+      i -= 1; // if we remove an element, we need to take that into account
+    }
+  }
+  if (currentChunk2.size() == 0) {
+          println("array empty");
+  }
+  return true;
+}
 void click(float x, float y) {
 
         //  this whole if-shenanigan is about black keys vs white keys. Since black keys are above the white ones, we want to check those first cuz overlaps
@@ -207,7 +199,7 @@ void keyPressed() {
         }
         if (key == ENTER) {
                 // println("YASS");
-                printArray(noteManager.currentChunk);
+                // printArray(noteManager.currentChunk);
                 // for( int i = 0; i < noteManager.arraySize; i++ ) {
                 //         println(i, noteManager.notes[i].highlightOpacity);
                 // }

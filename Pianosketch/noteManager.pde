@@ -98,7 +98,8 @@ void loadChunk(String csvfile)  {
                 // set the 'chunkFromCSV' for managing
                 currentChunk[i] = chunkFromCSV.getInt(i, "value");
         }
-        // printArray(currentChunk);
+        println("chunk loaded :");
+        printArray(currentChunk);
 }
 // when note is pressed, this is called to check if it's the correct note in the sequence)
 boolean isNextNote(int noteValue) {

@@ -10,11 +10,12 @@ Staff( float temp_y, int temp_staffHeight) {
         img.resize(0,this.staffHeight);
         // temp_x = x;
 }
-boolean show = false;
+boolean show = true;
 void drawStaff(){
         if (!this.show) {
+          imageMode(CORNERS);
                 rect(0,this.y, width, this.staffHeight);
-                imageMode(CORNERS);
+
                 image(img, x, y);
         }
 }

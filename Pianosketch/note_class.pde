@@ -7,7 +7,7 @@ float y;
 float noteWidth;
 float noteHeight;
 int keyValue;
-boolean active = false;
+boolean highlightActive = false;
 boolean isSharp = true;
 // SinOsc sine;
 // SoundFile sound;
@@ -77,7 +77,7 @@ void drawNote(){
 boolean highlight;
 color highlightColor = #FFFFFF;
 void highlightNote(boolean temp_highlight, int temp_highlightColor){
-        this.active = true;
+        this.highlightActive = true;
         this.highlight = temp_highlight;
         this.highlightColor = temp_highlightColor;
 }

@@ -95,7 +95,7 @@ void displayNotes(boolean displayAll) {
 IntList currentChunk2 = new IntList();
 void loadChunk(String csvfile)  {
         Table chunkFromCSV = loadTable(csvfile, "header"); // header, cuz our csv-files has headers (value, finger)
-        currentChunk = new int[chunkFromCSV.getRowCount()];
+
         for ( int i = 0; i < chunkFromCSV.getRowCount(); i++) {
                 //println(chunkFromCSV.getInt(i,0), chunk.getInt(i,1));
 
@@ -103,7 +103,7 @@ void loadChunk(String csvfile)  {
                 notes[chunkFromCSV.getInt(i, "value") - valueOffset].highlightNote(true, this.fingerColor(chunkFromCSV.getInt(i,1)));
                 // set the 'chunkFromCSV' for managing
                 currentChunk2.append(chunkFromCSV.getInt(i, "value"));
-                currentChunk[i] = chunkFromCSV.getInt(i, "value");
+                
         }
         println("chunk loaded :");
         printArray(currentChunk2);

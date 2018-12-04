@@ -15,7 +15,7 @@ FlowManager(int howManyChunks){
 void stepOne(){
         noteManager.loadChunk(giveCSVpath(chunkCounter));
         staff.show = true;
-        // noteManager.playChunk();
+        noteManager.playChunk();
 }
 String giveCSVpath(int count){
   String folder = "assets/chunk";

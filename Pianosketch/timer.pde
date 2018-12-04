@@ -1,10 +1,10 @@
 TimedEventGenerator noteTimer;
 void timedPlaying(){
-        println("timerCount: ",timerCount, "noteManager.currentChunk.length: ", noteManager.currentChunk.length);
-        if (timerCount < (noteManager.currentChunk.length - 1)) {
+        println("timerCount: ",timerCount, "noteManager.currentChunk.length: ", noteManager.currentChunk2.size());
+        if (timerCount < (noteManager.currentChunk2.size() - 1)) {
                 // println("playing note in chunk, count is ", timerCount);
-                noteManager.playTone(noteManager.currentChunk[timerCount]);
-                noteManager.notes[noteManager.currentChunk[timerCount] - noteManager.valueOffset].animateNote();
+                noteManager.playTone(noteManager.currentChunk2.get(timerCount));
+                noteManager.notes[noteManager.currentChunk2.get(timerCount) - noteManager.valueOffset].animateNote();
                 timerCount++;
         }
         else {

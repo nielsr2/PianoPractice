@@ -4,6 +4,7 @@ Note[] notes;
 // sinOsc sine;
 boolean highlightAll = false;
 boolean debug = true;
+boolean sequence = false;
 NoteManager(int notesArraySize, int noteValueOffset) {
         valueOffset = noteValueOffset;
         arraySize = notesArraySize;
@@ -72,6 +73,7 @@ void spreadOut(){
 
 }
 void displayNotes(boolean displayAll) {
+        rectMode(CORNER);
         if (displayAll) {
                 for( int i = 0; i < this.arraySize; i++ ) {
                         if(!notes[i].isSharp)
@@ -103,7 +105,7 @@ void loadChunk(String csvfile)  {
                 notes[chunkFromCSV.getInt(i, "value") - valueOffset].highlightNote(true, this.fingerColor(chunkFromCSV.getInt(i,1)));
                 // set the 'chunkFromCSV' for managing
                 currentChunk2.append(chunkFromCSV.getInt(i, "value"));
-                
+
         }
         println("chunk loaded :");
         printArray(currentChunk2);
@@ -126,16 +128,16 @@ boolean isNextNote(int noteValue) {
 
 boolean isAnyNote(int noteValue) {
 
-  for (int i = 0; i < currentChunk2.size(); i++ ) {
-    if (noteValue == currentChunk2.get(i)){
-      currentChunk2.remove(i);
-      i -= 1; // if we remove an element, we need to take that into account
-    }
-  }
-  if (currentChunk2.size() == 0) {
-          println("array empty");
-  }
-  return true;
+        for (int i = 0; i < currentChunk2.size(); i++ ) {
+                if (noteValue == currentChunk2.get(i)) {
+                        currentChunk2.remove(i);
+                        i -= 1; // if we remove an element, we need to take that into account
+                }
+        }
+        if (currentChunk2.size() == 0) {
+                flowManager.stepThree();
+        }
+        return true;
 }
 void click(float x, float y) {
 

@@ -52,8 +52,8 @@ void animateNote(){
 
 void drawNote(){
 
-         stroke(0);
-         // note
+        stroke(0);
+        // note
         fill(#FFFFFF, 255);
         if (isSharp) {
                 fill(#000000, 255);
@@ -70,14 +70,14 @@ void drawNote(){
         }
         // fill(this.highlightColor, this.highlightOpacity);
 
-        if (this.highlight) {
+        if (this.highlight && noteManager.highlightAll) {
                 fill(this.highlightColor,this.highlightOpacity);
         }
         rect(this.x,this.y,this.noteWidth,this.noteHeight);
         if (debug) {
-          // text("x: " + x + ",y: " + y +);
-          fill(255/2);
-          text(("keyValue: " + keyValue), x, y, noteWidth, noteHeight);
+                // text("x: " + x + ",y: " + y +);
+                fill(255/2);
+                text(("keyValue: " + keyValue), x, y, noteWidth, noteHeight);
         }
 }
 
@@ -96,8 +96,13 @@ boolean checkClick(float mouse_x, float mouse_y){
                 // println("key hit, value was ", this.keyValue);
                 this.playTone();
                 this.animateNote();
-                // noteManager.isNextNote(this.keyValue);
-                noteManager.isAnyNote(this.keyValue);
+                if (flowManager.sequence) {
+                        noteManager.isNextNote(this.keyValue);
+                }
+                else
+                {
+                        noteManager.isAnyNote(this.keyValue);
+                }
                 return true;
         }
         else {

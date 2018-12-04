@@ -34,6 +34,7 @@ void setup() {
         SINE = new SinOsc(this);
         // THIS, IS ENVELOPE = THE CONTROL OF VOLUME (DIGITAL AUDIO IS A LOT OF DIGITS BETWEEN -1. AND 1      , making the soundwaves. YOU CONTROL THE VOLUME BY MULTIPLYING THE WAVE FROM 0. ( NO SOUND) TO 1( ABOVE 1 THEN it's becoming larger than it originally was (these sine are prolly maxed out, but soundfiles might not)). the envelope part comes in, it's volume control over time. ASR, Attack, how  )
         ENV = new Env(this);
+        flowManager.setUI("hellloooo");
 }
 
 void draw(){
@@ -42,8 +43,18 @@ void draw(){
 
         noteManager.displayNotes(true);
         // myKeyboard.controllerChange();
+        flowManager.drawUI();
 
 }
 void mouseClicked(){
-        noteManager.click(mouseX, mouseY);
+        if (flowManager.ui) {
+          flowManager.ui = false;
+          if (flowManager.step == 1) {
+            flowManager.stepOne();
+          }
+        }
+        else
+        {
+                noteManager.click(mouseX, mouseY);
+        }
 };

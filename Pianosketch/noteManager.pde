@@ -5,7 +5,15 @@ Note[] notes;
 boolean highlightAll = false;
 boolean debug = true;
 boolean sequence = false;
-NoteManager(int notesArraySize, int noteValueOffset) {
+
+String[] chunks;
+int chunkCounter = 1;
+int step = 1;
+NoteManager(int notesArraySize, int noteValueOffset, int howManyChunks) {
+        chunks = new String[howManyChunks];
+        for (int i = 0; i < howManyChunks; i++) {
+                chunks[i] = giveCSVpath(i);
+        }
         valueOffset = noteValueOffset;
         arraySize = notesArraySize;
         notes = new Note[arraySize];
@@ -15,6 +23,18 @@ NoteManager(int notesArraySize, int noteValueOffset) {
         MidiBus.list();
         myKeyboard = new MidiBus(this,0,1); // parent, input, output (see console for listed midi in/outs) // http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html
         // printArray(notes  .highlightColor);
+}
+void stepOne(){
+        noteManager.highlightAll = true;
+        noteManager.loadChunk(giveCSVpath(chunkCounter));
+        staff.show = true;
+        delay(500);
+        noteManager.playChunk();
+}
+void stepThree(){
+        noteManager.highlightAll = true;
+        noteManager.loadChunk(giveCSVpath(chunkCounter));
+        staff.show = true;
 }
 void playTone(int keyValue){
         // http://newt.phys.unsw.edu.au/jw/notes.html
@@ -102,7 +122,7 @@ void loadChunk(String csvfile)  {
                 //println(chunkFromCSV.getInt(i,0), chunk.getInt(i,1));
 
                 // set notes
-                notes[chunkFromCSV.getInt(i, "value") - valueOffset].highlightNote(true, this.fingerColor(chunkFromCSV.getInt(i,1)));
+                notes[chunkFromCSV.getInt(i, "value") - valueOffset].highlightNote(true, fingerColor(chunkFromCSV.getInt(i,1)));
                 // set the 'chunkFromCSV' for managing
                 currentChunk2.append(chunkFromCSV.getInt(i, "value"));
 
@@ -135,7 +155,7 @@ boolean isAnyNote(int noteValue) {
                 }
         }
         if (currentChunk2.size() == 0) {
-                flowManager.stepThree();
+                noteManager.stepThree();
         }
         return true;
 }
@@ -165,46 +185,29 @@ void click(float x, float y) {
         }
 
 }
-// function for interpreting int for finger from CSV to colour
-int fingerColor(int finger){
-        if (finger == 1) {
-                return #FF0000;
-        }
-        else if (finger == 2) {
-                return #F0FF00;
-        }
-        else if (finger == 3) {
-                return #00FF00;
-        }
-        else if (finger == 4) {
-                return #00FFF0;
-        }
-        else if (finger == 5) {
-                return #0000FF;
-        }
-        else {
-                return #000000;
-        }
-}
+
 void controllerChange(int channel, int number, int value) {
         // Here we print the controller number.
         println(number);
 }
 
 
+boolean ui;
+String message = "bah";
+void setUI(String temp_message){
+        this.message = temp_message;
+        this.ui = true;
 }
-
-void keyPressed() {
-        if (key == TAB) {
-                println("YASS");
-                noteManager.playChunk();
+void drawUI(){
+        if (this.ui) {
+                background(0);
+                fill(255,255/2);
+                rectMode(CENTER);
+                rect(width/2,height/5*2, width/2, height/2);
+                fill(0);
+                textMode(CENTER);
+                text(this.message,width/2, height/2);
+                // noLoop();
         }
-        if (key == ENTER) {
-                // println("YASS");
-                // printArray(noteManager.currentChunk);
-                // for( int i = 0; i < noteManager.arraySize; i++ ) {
-                //         println(i, noteManager.notes[i].highlightOpacity);
-                // }
-
-        }
+}
 }

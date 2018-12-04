@@ -16,7 +16,7 @@ SinOsc SINE;
 Env ENV;
 
 NoteManager noteManager;
-FlowManager flowManager;
+
 Staff staff;
 
 
@@ -25,16 +25,16 @@ void setup() {
         size(1000,1000);
         setupTimer();
         staff = new Staff(50., 200);
-        noteManager = new NoteManager(36, 24);
+        noteManager = new NoteManager(36, 24,3);
 
-        flowManager = new FlowManager(3);
+        // noteManager = new noteManager(3);
 
         // myKeyboard = new MidiBus(this, 0, 1);
 // INSTANCE OF THE SinOsc, which is a sine wave oscillator.
         SINE = new SinOsc(this);
         // THIS, IS ENVELOPE = THE CONTROL OF VOLUME (DIGITAL AUDIO IS A LOT OF DIGITS BETWEEN -1. AND 1      , making the soundwaves. YOU CONTROL THE VOLUME BY MULTIPLYING THE WAVE FROM 0. ( NO SOUND) TO 1( ABOVE 1 THEN it's becoming larger than it originally was (these sine are prolly maxed out, but soundfiles might not)). the envelope part comes in, it's volume control over time. ASR, Attack, how  )
         ENV = new Env(this);
-        flowManager.setUI("hellloooo");
+        noteManager.setUI("hellloooo");
 }
 
 void draw(){
@@ -43,14 +43,14 @@ void draw(){
 
         noteManager.displayNotes(true);
         // myKeyboard.controllerChange();
-        flowManager.drawUI();
+        noteManager.drawUI();
 
 }
 void mouseClicked(){
-        if (flowManager.ui) {
-          flowManager.ui = false;
-          if (flowManager.step == 1) {
-            flowManager.stepOne();
+        if (noteManager.ui) {
+          noteManager.ui = false;
+          if (noteManager.step == 1) {
+            noteManager.stepOne();
           }
         }
         else

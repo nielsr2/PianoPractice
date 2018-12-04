@@ -126,6 +126,17 @@ boolean isNextNote(int noteValue) {
                 return false;
         }
 }
+
+boolean isAnyNote(int noteValue) {
+
+  for (int i = 0; i < currentChunk.length; i++ ) {
+    if (notevalue == currentChunk[i]){
+       // int[] temp_currentChunk = new int[currentChunk.length - 1];
+       int[] front = subset(currentChunk, 0, i - 1);
+       int[] end = subset(currentChunk, i, currentChunk.length - i);
+    }
+  }
+}
 void click(float x, float y) {
 
   //  this whole if-shenanigan is about black keys vs white keys. Since black keys are above the white ones, we want to check those first cuz overlaps

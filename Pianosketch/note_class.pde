@@ -48,7 +48,16 @@ void animateNote(){
 
 
 void drawNote(){
-        stroke(0);
+
+         stroke(0);
+         // note
+        fill(#FFFFFF, 255);
+        if (isSharp) {
+                fill(#000000, 255);
+        }
+        rect(this.x,this.y,this.noteWidth,this.noteHeight);
+
+        //  overlay
         if (this.animate) {
                 this.highlightOpacity += -10.;
                 // println("this.highlightOpacity: ", this.highlightOpacity);
@@ -56,11 +65,8 @@ void drawNote(){
                         animate = false;
                 }
         }
-        fill(this.highlightColor, this.highlightOpacity);
-        if (isSharp) {
-                // stroke(255,0,0);
-                fill(#000000, this.highlightOpacity);
-        }
+        // fill(this.highlightColor, this.highlightOpacity);
+
         if (this.highlight) {
                 fill(this.highlightColor,this.highlightOpacity);
         }

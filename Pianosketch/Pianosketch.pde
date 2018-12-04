@@ -1,4 +1,4 @@
-// TODONE make sharps into a separate array ( or otherwise differentiate ) and check that for clicks first √ works now
+
 // TODO implement noloop, to reduce cpu.
 
 // LIBRARIES we use

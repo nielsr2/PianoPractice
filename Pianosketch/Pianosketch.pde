@@ -1,6 +1,7 @@
 
 // TODO implement noloop, to reduce cpu.
 // TODO samples instead of synth
+// TODO implement keyboard MIDI
 //
 // LIBRARIES we use
 import org.multiply.processing.*; // for event timer
@@ -23,6 +24,7 @@ int timerCount = 0;
 void setup() {
         size(1000,1000);
         setupTimer();
+        staff = new Staff(50., 200);
         noteManager = new NoteManager(36, 24);
 
         flowManager = new FlowManager(3);
@@ -32,16 +34,12 @@ void setup() {
         SINE = new SinOsc(this);
         // THIS, IS ENVELOPE = THE CONTROL OF VOLUME (DIGITAL AUDIO IS A LOT OF DIGITS BETWEEN -1. AND 1      , making the soundwaves. YOU CONTROL THE VOLUME BY MULTIPLYING THE WAVE FROM 0. ( NO SOUND) TO 1( ABOVE 1 THEN it's becoming larger than it originally was (these sine are prolly maxed out, but soundfiles might not)). the envelope part comes in, it's volume control over time. ASR, Attack, how  )
         ENV = new Env(this);
-
-
-
 }
 
 void draw(){
-
+        background(255);
         staff.drawStaff();
-        // imageMode(CENTER);
-        // image(pianoBackground,width/2,height/2);
+
         noteManager.displayNotes(true);
         // myKeyboard.controllerChange();
 

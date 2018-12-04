@@ -3,13 +3,14 @@ int arraySize, valueOffset;
 Note[] notes;
 // sinOsc sine;
 boolean highlightAll = false;
-
+boolean debug = true;
 NoteManager(int notesArraySize, int noteValueOffset) {
+  valueOffset = noteValueOffset;
         arraySize = notesArraySize;
         notes = new Note[arraySize];
         spreadOut();
         // printArray(notes);
-        valueOffset = noteValueOffset;
+
         MidiBus.list();
         myKeyboard = new MidiBus(this,0,1); // parent, input, output (see console for listed midi in/outs) // http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html
         // printArray(notes  .highlightColor);
@@ -51,7 +52,7 @@ void spreadOut(){
                     step == 11 ) {
                         // println("exception");
                         notes[i ] = new Note(offsetSharpCount*(noteWidth/2) + (noteWidth/4),height/3,
-                         noteWidth/2, noteHeight*0.6, valueOffset + i, true);
+                         noteWidth/2, noteHeight*0.6, (valueOffset + i), true);
                         if (step == 4) {
                                 offsetSharpCount++;
                         }
@@ -63,7 +64,7 @@ void spreadOut(){
                 }
                 else {
                         notes[i] = new Note(offsetCount*((width/float(this.arraySize-15))),
-                                            height/3, noteWidth, noteHeight, valueOffset + i, false);
+                                            height/3, noteWidth, noteHeight, (valueOffset + i), false);
                         offsetCount++;
                         offsetSharpCount++;
                 }
@@ -85,6 +86,10 @@ void displayNotes(boolean displayAll) {
                         }
                 }
         }
+        if (debug) {
+          String strCurrentChunk = join(nf(currentChunk, 0), ", ");
+          text(("manager - current chunk" + strCurrentChunk + ", arraySize" + arraySize + "offset: " + valueOffset), 0, 900);
+        }
 }
 int[] currentChunk;
 void loadChunk(String csvfile)  {
@@ -103,10 +108,11 @@ void loadChunk(String csvfile)  {
 }
 // when note is pressed, this is called to check if it's the correct note in the sequence)
 boolean isNextNote(int noteValue) {
-        if (noteValue == currentChunk[currentChunk.length - 1]) {
+        if (noteValue == currentChunk[0]) {
+                println("yassss noteval was ", noteValue + " and chunk0 was", currentChunk[0], "length", currentChunk.length );
                 int[] temp_currentChunk = new int[currentChunk.length - 1];
-                for ( int i = 0; i < (currentChunk.length - 1); i++) {
-                        temp_currentChunk[i] = currentChunk[i];
+                for ( int i = 0; i < (temp_currentChunk.length ); i++) {
+                        temp_currentChunk[i] = currentChunk[i + 1];
                 }
                 currentChunk = temp_currentChunk;
                 // printArray(currentChunk);
@@ -182,9 +188,10 @@ void keyPressed() {
         }
         if (key == ENTER) {
                 // println("YASS");
-                for( int i = 0; i < noteManager.arraySize; i++ ) {
-                        println(i, noteManager.notes[i].highlightOpacity);
-                }
+                printArray(noteManager.currentChunk);
+                // for( int i = 0; i < noteManager.arraySize; i++ ) {
+                //         println(i, noteManager.notes[i].highlightOpacity);
+                // }
 
         }
 }

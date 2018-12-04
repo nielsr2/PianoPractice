@@ -9,15 +9,18 @@ float noteHeight;
 int keyValue;
 boolean highlightActive = false;
 boolean isSharp = true;
+boolean debug = true;
 // SinOsc sine;
 // SoundFile sound;
 Note(float temp_x,float temp_y, float temp_width, float temp_height, int temp_keyValue, boolean sharp){
+
         this.x = temp_x;
         this.y = temp_y;
         this.noteWidth = temp_width;
         this.noteHeight = temp_height;
         this.keyValue =  temp_keyValue;
         this.isSharp = sharp;
+        // println(keyValue);
         // this.sound = SoundFile(this, "bla/piano" + this.keyValue + ".mp3");
 
 }
@@ -71,6 +74,11 @@ void drawNote(){
                 fill(this.highlightColor,this.highlightOpacity);
         }
         rect(this.x,this.y,this.noteWidth,this.noteHeight);
+        if (debug) {
+          // text("x: " + x + ",y: " + y +);
+          fill(255/2);
+          text(("keyValue: " + keyValue), x, y, noteWidth, noteHeight);
+        }
 }
 
 // use this to set highlight boo + colour

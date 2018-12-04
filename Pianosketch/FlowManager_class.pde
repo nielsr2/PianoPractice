@@ -3,14 +3,11 @@ String[] chunks;
 int chunkCounter = 1;
 
 FlowManager(int howManyChunks){
-  staff = new Staff(50., 200);
+
         // println("flowmanger inited");
         chunks = new String[howManyChunks];
         for (int i = 0; i < howManyChunks; i++) {
-
-
                 chunks[i] = giveCSVpath(i);
-
         }
         this.stepOne();
 }

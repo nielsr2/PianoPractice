@@ -23,11 +23,11 @@ void setup() {
         flowManager = new FlowManager(3);
         size(1000,1000);
 
-        pianoBackground = loadImage("assets/piano2.png");
-        pianoBackground.resize(width,0);
+        // pianoBackground = loadImage("assets/piano2.png");
+        // pianoBackground.resize(width,0);
 
         noteManager.spreadOut();
-        noteManager.loadChunk("assets/chunkAll.csv");
+        // noteManager.loadChunk("assets/chunkAll.csv");
         // myKeyboard = new MidiBus(this, 0, 1);
 // INSTANCE OF THE SinOsc, which is a sine wave oscillator.
         SINE = new SinOsc(this);
@@ -43,8 +43,8 @@ void setup() {
 void draw(){
         // TODO setup pic properly
         staff.drawStaff();
-        imageMode(CENTER);
-        image(pianoBackground,width/2,height/2);
+        // imageMode(CENTER);
+        // image(pianoBackground,width/2,height/2);
         noteManager.displayNotes(true);
         // myKeyboard.controllerChange();
 

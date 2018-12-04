@@ -2,6 +2,7 @@ class NoteManager {
 int arraySize, valueOffset;
 Note[] notes;
 // sinOsc sine;
+boolean highlightAll = false;
 
 NoteManager(int notesArraySize, int noteValueOffset) {
         arraySize = notesArraySize;

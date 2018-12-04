@@ -1,5 +1,6 @@
 class FlowManager {
 String[] chunks;
+int chunkCounter = 1;
 FlowManager(int howManyChunks){
         // println("flowmanger inited");
         chunks = new String[howManyChunks];
@@ -10,11 +11,9 @@ FlowManager(int howManyChunks){
                 chunks[i] = path;
                 println(folder);
         }
-        // printArray(this.chunks);
 }
 
-
-
-
-
+void loadNext(String path){
+        noteManager.loadChunk(path);
+}
 }

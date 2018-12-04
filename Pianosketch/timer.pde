@@ -9,6 +9,8 @@ void timedPlaying(){
         }
         else {
                 noteTimer.setEnabled(false);
+                noteManager.step += 1;
+                noteManager.nextStep();
                 // println("chunk empty, timer stopped");
         }
 }

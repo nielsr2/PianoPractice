@@ -24,18 +24,43 @@ NoteManager(int notesArraySize, int noteValueOffset, int howManyChunks) {
         myKeyboard = new MidiBus(this,0,1); // parent, input, output (see console for listed midi in/outs) // http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html
         // printArray(notes  .highlightColor);
 }
-void stepOne(){
-        noteManager.highlightAll = true;
-        noteManager.loadChunk(giveCSVpath(chunkCounter));
-        staff.show = true;
-        delay(500);
-        noteManager.playChunk();
+void nextStep(){
+        if (this.step == 0 ) {
+                chunkCounter++;
+                this.step++;
+                this.clearHighlights();
+                this.nextStep();
+        }
+        if (this.step == 1) {
+                println("STEP1");
+                this.highlightAll = true;
+                this.loadChunk(giveCSVpath(chunkCounter));
+                staff.show = true;
+                delay(1000);
+                this.playChunk();
+        }
+        if (this.step == 2 ) {
+                println("STEP2");
+                this.setUI("yas no sequence");
+                this.sequence = false;
+        }
+        if (this.step == 3 ) {
+                println("STEP3");
+                this.loadChunk(giveCSVpath(chunkCounter));
+                this.setUI("SEQUENCE!!!!");
+                this.sequence = true;
+        }
+        if (this.step == 4 ) {
+                println("STEP4");
+                staff.show = false;
+                this.highlightAll = false;
+                this.loadChunk(giveCSVpath(chunkCounter));
+                println("asdfasdf");
+                this.setUI("SEQUENCE!!!!");
+                this.sequence = true;
+        }
 }
-void stepThree(){
-        noteManager.highlightAll = true;
-        noteManager.loadChunk(giveCSVpath(chunkCounter));
-        staff.show = true;
-}
+
 void playTone(int keyValue){
         // http://newt.phys.unsw.edu.au/jw/notes.html
         float test = float(keyValue + this.valueOffset);
@@ -43,7 +68,7 @@ void playTone(int keyValue){
         // float freq = 2.^((this.keyValue-69)/12)*440.;
         float freq = pow(2,(test-69)/12);
         freq = freq*440.;
-        println(freq, keyValue);
+        // println(freq, keyValue);
 
         SINE.set(freq,0.5,0.0,1);
         SINE.play();
@@ -65,7 +90,6 @@ void spreadOut(){
 
                 int step = (i + 1) % 12;
                 // println(step);
-
                 if (step == 2 ||
                     step == 4 ||
                     step ==7 ||
@@ -108,12 +132,13 @@ void displayNotes(boolean displayAll) {
                         }
                 }
         }
+        this.drawUI();
         if (debug) {
+                fill(255/2);
                 // String strCurrentChunk = join(nf(currentChunk, 0), ", ");
-                text(("manager - current chunk" + currentChunk2 + ", arraySize" + arraySize + "offset: " + valueOffset), 0, 900);
+                text(("manager - current chunk" + currentChunk2 + ", arraySize" + arraySize + "offset: " + valueOffset + "step" + this.step + "countChunk" + chunkCounter), 0, 900);
         }
 }
-
 IntList currentChunk2 = new IntList();
 void loadChunk(String csvfile)  {
         Table chunkFromCSV = loadTable(csvfile, "header"); // header, cuz our csv-files has headers (value, finger)
@@ -137,6 +162,11 @@ boolean isNextNote(int noteValue) {
                 currentChunk2.remove(0);
                 if (currentChunk2.size() == 0) {
                         println("array empty");
+                        this.step += 1;
+                        if (this.step == 5) {
+                                this.step = 0;
+                        }
+                        this.nextStep();
                 }
 
                 return true;
@@ -155,7 +185,8 @@ boolean isAnyNote(int noteValue) {
                 }
         }
         if (currentChunk2.size() == 0) {
-                noteManager.stepThree();
+                this.step += 1;
+                this.nextStep();
         }
         return true;
 }
@@ -191,6 +222,14 @@ void controllerChange(int channel, int number, int value) {
         println(number);
 }
 
+/*
+   ██    ██ ██
+   ██    ██ ██
+   ██    ██ ██
+   ██    ██ ██
+   ██████  ██
+ */
+
 
 boolean ui;
 String message = "bah";
@@ -204,10 +243,15 @@ void drawUI(){
                 fill(255,255/2);
                 rectMode(CENTER);
                 rect(width/2,height/5*2, width/2, height/2);
-                fill(0);
+                // fill(255/2);
                 textMode(CENTER);
                 text(this.message,width/2, height/2);
                 // noLoop();
         }
+}
+void clearHighlights(){
+  for( int i = 0; i < this.arraySize; i++ ) {
+    notes[i].highlight = false;
+  }
 }
 }

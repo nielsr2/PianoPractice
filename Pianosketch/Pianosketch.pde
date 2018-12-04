@@ -43,14 +43,14 @@ void draw(){
 
         noteManager.displayNotes(true);
         // myKeyboard.controllerChange();
-        noteManager.drawUI();
+        
 
 }
 void mouseClicked(){
         if (noteManager.ui) {
           noteManager.ui = false;
           if (noteManager.step == 1) {
-            noteManager.stepOne();
+            noteManager.nextStep();
           }
         }
         else

@@ -20,8 +20,7 @@ NoteManager(int notesArraySize, int noteValueOffset, int howManyChunks) {
         spreadOut();
         // printArray(notes);
 
-        MidiBus.list();
-        myKeyboard = new MidiBus(this,0,1); // parent, input, output (see console for listed midi in/outs) // http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html
+
         // printArray(notes  .highlightColor);
 }
 void nextStep(){
@@ -29,6 +28,7 @@ void nextStep(){
                 chunkCounter++;
                 this.step++;
                 this.clearHighlights();
+
                 this.nextStep();
         }
         if (this.step == 1) {
@@ -43,18 +43,21 @@ void nextStep(){
                 println("STEP2");
                 this.setUI("yas no sequence");
                 this.sequence = false;
+                this.highlightNext();
         }
         if (this.step == 3 ) {
                 println("STEP3");
                 this.loadChunk(giveCSVpath(chunkCounter));
                 this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
+                this.highlightNext();
         }
         if (this.step == 4 ) {
                 println("STEP4");
                 staff.show = false;
                 this.highlightAll = false;
                 this.loadChunk(giveCSVpath(chunkCounter));
+                this.highlightNext();
                 println("asdfasdf");
                 this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
@@ -139,6 +142,15 @@ void displayNotes(boolean displayAll) {
                 text(("manager - current chunk" + currentChunk2 + ", arraySize" + arraySize + "offset: " + valueOffset + "step" + this.step + "countChunk" + chunkCounter), 0, 900);
         }
 }
+/*
+   ██           ██████       █████      ██████           ██████     ██   ██     ██    ██     ███    ██     ██   ██
+   ██          ██    ██     ██   ██     ██   ██         ██          ██   ██     ██    ██     ████   ██     ██  ██
+   ██          ██    ██     ███████     ██   ██         ██          ███████     ██    ██     ██ ██  ██     █████
+   ██          ██    ██     ██   ██     ██   ██         ██          ██   ██     ██    ██     ██  ██ ██     ██  ██
+   ███████      ██████      ██   ██     ██████           ██████     ██   ██      ██████      ██   ████     ██   ██
+ */
+
+
 IntList currentChunk2 = new IntList();
 void loadChunk(String csvfile)  {
         Table chunkFromCSV = loadTable(csvfile, "header"); // header, cuz our csv-files has headers (value, finger)
@@ -153,20 +165,35 @@ void loadChunk(String csvfile)  {
 
         }
         println("chunk loaded :");
+        highlightNext();
         printArray(currentChunk2);
 }
+/*
+                    ██     ███████                 ███    ██  ██████  ████████ ███████
+                    ██     ██                      ████   ██ ██    ██    ██    ██
+                    ██     ███████                 ██ ██  ██ ██    ██    ██    █████
+                    ██          ██                 ██  ██ ██ ██    ██    ██    ██
+                    ██     ███████                 ██   ████  ██████     ██    ███████
+ */
+
+
 // when note is pressed, this is called to check if it's the correct note in the sequence)
 boolean isNextNote(int noteValue) {
 
         if (noteValue == currentChunk2.get(0)) {
+
                 currentChunk2.remove(0);
+
                 if (currentChunk2.size() == 0) {
+
                         println("array empty");
                         this.step += 1;
                         if (this.step == 5) {
                                 this.step = 0;
                         }
                         this.nextStep();
+                } else {
+                        highlightNext();
                 }
 
                 return true;
@@ -190,6 +217,16 @@ boolean isAnyNote(int noteValue) {
         }
         return true;
 }
+
+/*
+   ██████ ██      ██  ██████ ██   ██
+   ██      ██      ██ ██      ██  ██
+   ██      ██      ██ ██      █████
+   ██      ██      ██ ██      ██  ██
+   ██████ ███████ ██  ██████ ██   ██
+ */
+
+
 void click(float x, float y) {
 
         //  this whole if-shenanigan is about black keys vs white keys. Since black keys are above the white ones, we want to check those first cuz overlaps
@@ -217,18 +254,18 @@ void click(float x, float y) {
 
 }
 
-void controllerChange(int channel, int number, int value) {
-        // Here we print the controller number.
-        println(number);
-}
+
 
 /*
-   ██    ██ ██
-   ██    ██ ██
-   ██    ██ ██
-   ██    ██ ██
-   ██████  ██
+   ██    ██     ██
+   ██    ██     ██
+   ██    ██     ██
+   ██    ██     ██
+   ██████      ██
  */
+
+
+
 
 
 boolean ui;
@@ -239,6 +276,7 @@ void setUI(String temp_message){
 }
 void drawUI(){
         if (this.ui) {
+                // TODO MAKE THIS PRETTY
                 background(0);
                 fill(255,255/2);
                 rectMode(CENTER);
@@ -249,9 +287,25 @@ void drawUI(){
                 // noLoop();
         }
 }
+
+/*
+   ██   ██ ██  ██████  ██   ██ ██      ██  ██████  ██   ██ ████████
+   ██   ██ ██ ██       ██   ██ ██      ██ ██       ██   ██    ██
+   ███████ ██ ██   ███ ███████ ██      ██ ██   ███ ███████    ██
+   ██   ██ ██ ██    ██ ██   ██ ██      ██ ██    ██ ██   ██    ██
+   ██   ██ ██  ██████  ██   ██ ███████ ██  ██████  ██   ██    ██
+ */
+
+
 void clearHighlights(){
-  for( int i = 0; i < this.arraySize; i++ ) {
-    notes[i].highlight = false;
-  }
+        for( int i = 0; i < this.arraySize; i++ ) {
+                notes[i].highlight = false;
+        }
 }
+
+void highlightNext(){
+        int next = this.currentChunk2.get(0) - this.valueOffset;
+        this.notes[next].highlightOpacity = 255.;
+}
+
 }

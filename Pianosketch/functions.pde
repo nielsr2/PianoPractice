@@ -34,6 +34,7 @@ void keyPressed() {
                 noteManager.playChunk();
         }
         if (key == ENTER) {
+          playSample();
                 // println("YASS");
                 // printArray(noteManager.currentChunk);
                 // for( int i = 0; i < noteManager.arraySize; i++ ) {

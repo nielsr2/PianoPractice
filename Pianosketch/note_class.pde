@@ -1,5 +1,6 @@
 // https://atom.io/packages/processing
 
+
 class Note {
 PImage overlay; // not used;
 float x;
@@ -46,7 +47,7 @@ float highlightOpacity = 100;
 boolean animate = false;
 void animateNote(){
         this.animate = true;
-        this.highlightOpacity = 255.;
+        this.highlightOpacity = 200.;
 }
 
 
@@ -88,12 +89,14 @@ void highlightNote(boolean temp_highlight, int temp_highlightColor){
         this.highlightActive = true;
         this.highlight = temp_highlight;
         this.highlightColor = temp_highlightColor;
+
 }
 
 // called from noteManager using a for loop on notes array.
 boolean checkClick(float mouse_x, float mouse_y){
         if (mouse_x > this.x && mouse_x < (this.x + this.noteWidth) && mouse_y > this.y && mouse_y < this.y + (this.noteHeight) ) {
                 // println("key hit, value was ", this.keyValue);
+
                 this.playTone();
                 this.animateNote();
                 if (noteManager.sequence) {
@@ -109,6 +112,24 @@ boolean checkClick(float mouse_x, float mouse_y){
                 return false;
         }
 }
-
+/*
+███    ███     ██     ██████      ██
+████  ████     ██     ██   ██     ██
+██ ████ ██     ██     ██   ██     ██
+██  ██  ██     ██     ██   ██     ██
+██      ██     ██     ██████      ██
+*/
+void onMIDI(int value){
+  this.playTone();
+  this.animateNote();
+  if (noteManager.sequence) {
+          noteManager.isNextNote(this.keyValue);
+  }
+  else
+  {
+          noteManager.isAnyNote(this.keyValue);
+  }
+}
 
 }
+// TODO implement colorMode(mode)

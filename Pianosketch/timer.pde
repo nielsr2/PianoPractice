@@ -1,7 +1,7 @@
 TimedEventGenerator noteTimer;
 void timedPlaying(){
         println("timerCount: ",timerCount, "noteManager.currentChunk.length: ", noteManager.currentChunk2.size());
-        if (timerCount < (noteManager.currentChunk2.size() - 1)) {
+        if (timerCount < (noteManager.currentChunk2.size())) {
                 // println("playing note in chunk, count is ", timerCount);
                 noteManager.playTone(noteManager.currentChunk2.get(timerCount));
                 noteManager.notes[noteManager.currentChunk2.get(timerCount) - noteManager.valueOffset].animateNote();

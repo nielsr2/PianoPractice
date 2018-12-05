@@ -21,7 +21,9 @@ Staff staff;
 
 
 int timerCount = 0;
+SoundFile file;
 void setup() {
+file  = new SoundFile(this, "sample.wav");
         size(1000,1000);
         setupTimer();
         staff = new Staff(50., 200);
@@ -36,13 +38,13 @@ void setup() {
 
 
 }
-
-void draw(){
-  int channel = 0;
+int channel = 0;
 int pitch = 64;
 int velocity = 127;
+void draw(){
 
-        // myKeyboard.sendNoteOn(channel, pitch, velocity);
+
+        myKeyboard.sendNoteOn(channel, pitch, velocity);
         background(255);
         staff.drawStaff();
 
@@ -68,6 +70,16 @@ void controllerChange(int channel, int number, int value) {
         println(number);
 }
 //
+
+/*
+██   ██ ███████ ██    ██ ██████   ██████   █████  ██████  ██████
+██  ██  ██       ██  ██  ██   ██ ██    ██ ██   ██ ██   ██ ██   ██
+█████   █████     ████   ██████  ██    ██ ███████ ██████  ██   ██
+██  ██  ██         ██    ██   ██ ██    ██ ██   ██ ██   ██ ██   ██
+██   ██ ███████    ██    ██████   ██████  ██   ██ ██   ██ ██████
+*/
+
+
 void noteOn(int channel, int pitch, int velocity) {
 // println("LO");
         // Receive a noteOn
@@ -78,14 +90,31 @@ void noteOn(int channel, int pitch, int velocity) {
         println("Pitch:"+pitch);
         println("Velocity:"+velocity);
         midi(pitch);
-}
-void midi(int key){
-  print(key);
-  noteManager.notes[(key - noteManager.valueOffset)].onMIDI(key);
+        // I DUNNO WHY I CAN'T PARSE ARGUMENTS.
+        // playSample();
 }
 
-SoundFile sample;
+void noteOff(int channel, int pitch, int velocity) {
+  // Receive a noteOff
+
+  println();
+  println("Note Off:");
+  println("--------");
+  println("Channel:"+channel);
+  println("Pitch:"+pitch);
+  println("Velocity:"+velocity);
+  // stopSample();
+}
+void midi(int p){
+  print(p);
+  noteManager.notes[(p - noteManager.valueOffset)].onMIDI(p);
+}
+
+
 void playSample(){
-        sample = new SoundFile(this, "/assets/sample.mp3");
-        sample.play();
+        file.play();
+}
+
+void stopSample(){
+  file.stop();
 }

@@ -29,7 +29,7 @@ void nextStep(){
                 this.step++;
                 this.clearHighlights();
 
-                this.nextStep();
+                // this.nextStep();
         }
         if (this.step == 1) {
                 println("STEP1");
@@ -263,6 +263,7 @@ void click(float x, float y) {
    ██    ██     ██
    ██████      ██
  */
+
 
 
 

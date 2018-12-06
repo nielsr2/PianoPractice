@@ -47,13 +47,14 @@ void nextStep(){
                 // while (speak1.isPlaying()) {
                 //   println("HAHAHA");
                 // }
-                playNfreeze(speak1);
+
                 println("DONE......");
                 this.highlightAll = true;
                 this.loadChunk(giveCSVpath(chunkCounter));
 
                 staff.show = true;
-                delay(1000);
+                // delay(1000);
+                playNfreeze(speak1);
                 this.playChunk();
         }
         if (this.step == 2 ) {

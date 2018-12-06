@@ -1,3 +1,13 @@
+// TODO make delay longer
+// TODO speech
+// TODO make chunk CSV, make two versions noobs/pro MIKKEL
+// TODO fri-leg til sidst
+// TODO fix note highlight
+// TODO fingering pic, and make colors fit with function for int
+// TODO make staff pics KATRINE;
+// TODO write razvan
+
+
 class NoteManager {
 int arraySize, valueOffset;
 Note[] notes;
@@ -117,8 +127,9 @@ void spreadOut(){
                         offsetSharpCount++;
                 }
         }
-
 }
+
+
 void displayNotes(boolean displayAll) {
         rectMode(CORNER);
         if (displayAll) {
@@ -142,6 +153,7 @@ void displayNotes(boolean displayAll) {
                 text(("manager - current chunk" + currentChunk2 + ", arraySize" + arraySize + "offset: " + valueOffset + "step" + this.step + "countChunk" + chunkCounter), 0, 900);
         }
 }
+
 /*
    ██           ██████       █████      ██████           ██████     ██   ██     ██    ██     ███    ██     ██   ██
    ██          ██    ██     ██   ██     ██   ██         ██          ██   ██     ██    ██     ████   ██     ██  ██

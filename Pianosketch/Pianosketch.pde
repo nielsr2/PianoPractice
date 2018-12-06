@@ -24,6 +24,7 @@ int timerCount = 0;
 SoundFile file;
 SoundFile speak1, speak2, speak3;
 void setup() {
+
         speak1 = new SoundFile(this, "speak/speak4.wav");
         speak2 = new SoundFile(this, "speak/speak2.wav");
         speak3 = new SoundFile(this, "speak/speak3.wav");
@@ -32,6 +33,7 @@ void setup() {
         setupTimer();
         staff = new Staff(50., 200);
         noteManager = new NoteManager(36, 24,3);
+        loadSamples();
         MidiBus.list();
         myKeyboard = new MidiBus(this,0,1); // parent, input, output (see console for listed midi in/outs) // http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html
 // INSTANCE OF THE SinOsc, which is a sine wave oscillator.
@@ -89,13 +91,14 @@ void noteOn(int channel, int pitch, int velocity) {
         // Receive a noteOn
         // println();
         println("Note On:");
-        println("--------");
-        println("Channel:"+channel);
+        // println("--------");
+        // println("Channel:"+channel);
         println("Pitch:"+pitch);
-        println("Velocity:"+velocity);
-        midi(pitch);
+        // println("Velocity:"+velocity);
+        // midi(pitch);
         // I DUNNO WHY I CAN'T PARSE ARGUMENTS.
-        // playSample();
+        playSample(pitch);
+        // midi(pitch);
 }
 
 void noteOff(int channel, int pitch, int velocity) {
@@ -103,22 +106,37 @@ void noteOff(int channel, int pitch, int velocity) {
 
         println();
         println("Note Off:");
-        println("--------");
-        println("Channel:"+channel);
+        // println("--------");
+        // println("Channel:"+channel);
         println("Pitch:"+pitch);
-        println("Velocity:"+velocity);
-        // stopSample();
+        // println("Velocity:"+velocity);
+        stopSample(pitch);
 }
 void midi(int p){
         print(p);
-        noteManager.notes[(p - noteManager.valueOffset)].onMIDI(p);
+        // if ( + > p - noteManager.valueOffset) {
+                noteManager.notes[(p - noteManager.valueOffset)].onMIDI(p);
+        // }
+        // for (SoundFile s : samles) {
+        //     s.update();
+        //     mod.display();
+        //   }
+
 }
 
 
-void playSample(){
-        file.play();
+void playSample(int p){
+        // file.play();
+        // if (p - noteManager.valueOffset > noteManager.valueOffset) {
+                SoundFile sample = samples.get((p - noteManager.valueOffset));
+                sample.play();
+        // }
 }
 
-void stopSample(){
-        file.stop();
+void stopSample(int p){
+        // file.stop();
+        // if (p - noteManager.valueOffset > noteManager.valueOffset) {
+                SoundFile sample = samples.get((p - noteManager.valueOffset));
+                sample.stop();
+        // }
 }

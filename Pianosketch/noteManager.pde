@@ -1,4 +1,4 @@
-// TODO make delay longer
+ // TODO make delay longer
 // TODO speech
 // TODO make chunk CSV, make two versions noobs/pro MIKKEL
 // TODO fri-leg til sidst
@@ -60,7 +60,7 @@ void nextStep(){
         if (this.step == 2 ) {
                 println("STEP2");
                 // this.setUI("yas no sequence");
-                this.sequence = false;
+                this.sequence = true;
                 this.highlightNext();
                 playNfreeze(speak1);
         }

@@ -34,7 +34,7 @@ void keyPressed() {
                 noteManager.playChunk();
         }
         if (key == ENTER) {
-          playSample();
+                // playSample();
                 // println("YASS");
                 // printArray(noteManager.currentChunk);
                 // for( int i = 0; i < noteManager.arraySize; i++ ) {
@@ -46,15 +46,40 @@ void keyPressed() {
 
 
 void playNfreeze(SoundFile audio) {
-  audio.play();
-  int i = 0;
-  while (true) {
-          delay(1000);
-          if (audio.isPlaying()) {
-                  i++;
-                  println("File is still playing after " + i + " seconds");
-          } else {
-                  break;
-          }
-  }
+        audio.play();
+        int i = 0;
+        while (true) {
+                delay(1000);
+                if (audio.isPlaying()) {
+                        i++;
+                        println("File is still playing after " + i + " seconds");
+                } else {
+                        break;
+                }
+        }
+}
+
+// SoundFile[] samples = new SoundFile[noteManager.arraySize];
+ArrayList<SoundFile> samples = new ArrayList<SoundFile>();
+void loadSamples(){
+        // [] samples = new SoundFile(this, "test");
+
+
+
+        String[] noteNames = {"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
+        int octave  = 0;
+        for (int i = 0; i < noteManager.arraySize; i++) {
+                int octaveStep = i % 12;
+                println(octaveStep);
+
+                if (octaveStep == 1) {
+                        octave++;
+                };
+                samples.add(new SoundFile(this, noteNames[octaveStep] + octave + ".wav"));
+                println(noteNames[(octaveStep)] + octave + ".wav");
+                // samples[i] = new SoundFile(this, noteNames[octaveStep-1] + octave + ".wav");
+
+
+        }
+        printArray(samples);
 }

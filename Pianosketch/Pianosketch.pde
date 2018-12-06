@@ -22,8 +22,12 @@ Staff staff;
 
 int timerCount = 0;
 SoundFile file;
+SoundFile speak1, speak2, speak3;
 void setup() {
-file  = new SoundFile(this, "sample.wav");
+        speak1 = new SoundFile(this, "speak/speak4.wav");
+        speak2 = new SoundFile(this, "speak/speak2.wav");
+        speak3 = new SoundFile(this, "speak/speak3.wav");
+        file  = new SoundFile(this, "sample.wav");
         size(1000,1000);
         setupTimer();
         staff = new Staff(50., 200);
@@ -72,12 +76,12 @@ void controllerChange(int channel, int number, int value) {
 //
 
 /*
-██   ██ ███████ ██    ██ ██████   ██████   █████  ██████  ██████
-██  ██  ██       ██  ██  ██   ██ ██    ██ ██   ██ ██   ██ ██   ██
-█████   █████     ████   ██████  ██    ██ ███████ ██████  ██   ██
-██  ██  ██         ██    ██   ██ ██    ██ ██   ██ ██   ██ ██   ██
-██   ██ ███████    ██    ██████   ██████  ██   ██ ██   ██ ██████
-*/
+   ██   ██ ███████ ██    ██ ██████   ██████   █████  ██████  ██████
+   ██  ██  ██       ██  ██  ██   ██ ██    ██ ██   ██ ██   ██ ██   ██
+   █████   █████     ████   ██████  ██    ██ ███████ ██████  ██   ██
+   ██  ██  ██         ██    ██   ██ ██    ██ ██   ██ ██   ██ ██   ██
+   ██   ██ ███████    ██    ██████   ██████  ██   ██ ██   ██ ██████
+ */
 
 
 void noteOn(int channel, int pitch, int velocity) {
@@ -95,19 +99,19 @@ void noteOn(int channel, int pitch, int velocity) {
 }
 
 void noteOff(int channel, int pitch, int velocity) {
-  // Receive a noteOff
+        // Receive a noteOff
 
-  println();
-  println("Note Off:");
-  println("--------");
-  println("Channel:"+channel);
-  println("Pitch:"+pitch);
-  println("Velocity:"+velocity);
-  // stopSample();
+        println();
+        println("Note Off:");
+        println("--------");
+        println("Channel:"+channel);
+        println("Pitch:"+pitch);
+        println("Velocity:"+velocity);
+        // stopSample();
 }
 void midi(int p){
-  print(p);
-  noteManager.notes[(p - noteManager.valueOffset)].onMIDI(p);
+        print(p);
+        noteManager.notes[(p - noteManager.valueOffset)].onMIDI(p);
 }
 
 
@@ -116,5 +120,5 @@ void playSample(){
 }
 
 void stopSample(){
-  file.stop();
+        file.stop();
 }

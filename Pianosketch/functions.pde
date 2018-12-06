@@ -43,3 +43,18 @@ void keyPressed() {
 
         }
 }
+
+
+void playNfreeze(SoundFile audio) {
+  audio.play();
+  int i = 0;
+  while (true) {
+          delay(1000);
+          if (audio.isPlaying()) {
+                  i++;
+                  println("File is still playing after " + i + " seconds");
+          } else {
+                  break;
+          }
+  }
+}

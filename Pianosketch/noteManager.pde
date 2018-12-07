@@ -1,4 +1,4 @@
-// TODO make delay longer
+ // TODO make delay longer
 // TODO speech
 // TODO make chunk CSV, make two versions noobs/pro MIKKEL
 // TODO fri-leg til sidst
@@ -43,24 +43,35 @@ void nextStep(){
         }
         if (this.step == 1) {
                 println("STEP1");
+
+                // while (speak1.isPlaying()) {
+                //   println("HAHAHA");
+                // }
+
+                println("DONE......");
                 this.highlightAll = true;
                 this.loadChunk(giveCSVpath(chunkCounter));
+
                 staff.show = true;
-                delay(1000);
+                // delay(1000);
+                playNfreeze(speak1);
                 this.playChunk();
         }
         if (this.step == 2 ) {
                 println("STEP2");
-                this.setUI("yas no sequence");
-                this.sequence = false;
+                // this.setUI("yas no sequence");
+                this.sequence = true;
                 this.highlightNext();
+                playNfreeze(speak1);
         }
         if (this.step == 3 ) {
                 println("STEP3");
                 this.loadChunk(giveCSVpath(chunkCounter));
-                this.setUI("SEQUENCE!!!!");
+                // this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
                 this.highlightNext();
+                playNfreeze(speak1);
+
         }
         if (this.step == 4 ) {
                 println("STEP4");
@@ -69,8 +80,9 @@ void nextStep(){
                 this.loadChunk(giveCSVpath(chunkCounter));
                 this.highlightNext();
                 println("asdfasdf");
-                this.setUI("SEQUENCE!!!!");
+                // this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
+                playNfreeze(speak1);
         }
 }
 
@@ -290,13 +302,13 @@ void setUI(String temp_message){
 void drawUI(){
         if (this.ui) {
                 // TODO MAKE THIS PRETTY
-                background(0);
-                fill(255,255/2);
-                rectMode(CENTER);
-                rect(width/2,height/5*2, width/2, height/2);
-                // fill(255/2);
-                textMode(CENTER);
-                text(this.message,width/2, height/2);
+                // background(0);
+                // fill(255,255/2);
+                // rectMode(CENTER);
+                // rect(width/2,height/5*2, width/2, height/2);
+                // // fill(255/2);
+                // textMode(CENTER);
+                // text(this.message,width/2, height/2);
                 // noLoop();
         }
 }

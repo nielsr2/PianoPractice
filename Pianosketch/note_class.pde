@@ -120,7 +120,7 @@ boolean checkClick(float mouse_x, float mouse_y){
 ██      ██     ██     ██████      ██
 */
 void onMIDI(int value){
-  this.playTone();
+  // this.playTone();
   this.animateNote();
   if (noteManager.sequence) {
           noteManager.isNextNote(this.keyValue);

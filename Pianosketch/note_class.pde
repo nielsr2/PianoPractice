@@ -43,7 +43,7 @@ void playTone(){
         // env.play(triOsc, attackTime, sustainTime, sustainLevel, releaseTime);
 }
 
-float highlightOpacity = 150;
+float highlightOpacity = 175;
 boolean animate = false;
 void animateNote(){
         this.animate = true;
@@ -57,7 +57,7 @@ void drawNote(){
         // note
         fill(#FFFFFF, 255);
         if (isSharp) {
-                fill(#333333, 255);
+                fill(#444444, 255);
         }
         rect(this.x,this.y,this.noteWidth,this.noteHeight);
 
@@ -65,7 +65,7 @@ void drawNote(){
         if (this.animate) {
                 this.highlightOpacity += -10.;
                 // println("this.highlightOpacity: ", this.highlightOpacity);
-                if (this.highlightOpacity < 150) {
+                if (this.highlightOpacity < 175) {
                         animate = false;
                 }
         }

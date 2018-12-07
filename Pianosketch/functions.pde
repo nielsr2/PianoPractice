@@ -4,16 +4,16 @@ int fingerColor(int finger){
                 return #FF0000;
         }
         else if (finger == 2) {
-                return #F0FF00;
+                return #CBFF00;
         }
         else if (finger == 3) {
-                return #00FF00;
+                return #00FF68;
         }
         else if (finger == 4) {
-                return #00FFF0;
+                return #0063FF;
         }
         else if (finger == 5) {
-                return #0000FF;
+                return #CF00FF;
         }
         else {
                 return #000000;

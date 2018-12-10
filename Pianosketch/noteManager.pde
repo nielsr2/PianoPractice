@@ -62,7 +62,7 @@ void nextStep(){
                         playNfreeze(startremark);
                 }
                 if (chunkCounter == 2) {
-                        playNfreeze(step4);
+                        playNfreeze(speakStep4);
                 }
                 this.playChunk();
         }

@@ -1,4 +1,4 @@
- // TODO make delay longer
+// TODO make delay longer
 // TODO speech
 // TODO make chunk CSV, make two versions noobs/pro MIKKEL
 // TODO fri-leg til sidst
@@ -58,7 +58,12 @@ void nextStep(){
 
                 staff.show = true;
                 // delay(1000);
-                playNfreeze(speak1);
+                if (chunkCounter == 1) {
+                        playNfreeze(startremark);
+                }
+                if (chunkCounter == 2) {
+                        playNfreeze(step4);
+                }
                 this.playChunk();
         }
         if (this.step == 2 ) {
@@ -66,7 +71,7 @@ void nextStep(){
                 // this.setUI("yas no sequence");
                 this.sequence = true;
                 this.highlightNext();
-                playNfreeze(speak1);
+                playNfreeze(speakStep1);
         }
         if (this.step == 3 ) {
                 println("STEP3");
@@ -74,7 +79,7 @@ void nextStep(){
                 // this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
                 this.highlightNext();
-                playNfreeze(speak1);
+                playNfreeze(speakStep2);
 
         }
         if (this.step == 4 ) {
@@ -86,7 +91,7 @@ void nextStep(){
                 println("asdfasdf");
                 // this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
-                playNfreeze(speak1);
+                playNfreeze(speakStep3);
         }
 }
 

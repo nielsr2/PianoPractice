@@ -49,6 +49,7 @@ void nextStep(){
         }
         if (this.step == 1) {
                 println("STEP1");
+                 this.sequence = true;
 
                 // while (speak1.isPlaying()) {
                 //   println("HAHAHA");
@@ -90,6 +91,7 @@ void nextStep(){
                 staff.show = false;
                 this.highlightAll = false;
                 if (this.chunkCounter == 2) {
+                  this.sequence = false;
                         playNfreeze(finalremark);
                 }
                 else
@@ -100,7 +102,7 @@ void nextStep(){
 
                 println("asdfasdf");
                 // this.setUI("SEQUENCE!!!!");
-                this.sequence = true;
+                // this.sequence = true;
 
         }
 }

@@ -95,19 +95,7 @@ void nextStep(){
         }
 }
 
-void playTone(int keyValue){
-        // http://newt.phys.unsw.edu.au/jw/notes.html
-        float test = float(keyValue + this.valueOffset);
 
-        // float freq = 2.^((this.keyValue-69)/12)*440.;
-        float freq = pow(2,(test-69)/12);
-        freq = freq*440.;
-        // println(freq, keyValue);
-
-        SINE.set(freq,0.5,0.0,1);
-        SINE.play();
-        ENV.play(SINE,0.1,0.004,0.3,0.4);
-}
 void playChunk(){
         timerCount = 0;
         noteTimer.setEnabled(true);

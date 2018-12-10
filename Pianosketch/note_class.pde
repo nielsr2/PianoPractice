@@ -30,6 +30,7 @@ Note(float temp_x,float temp_y, float temp_width, float temp_height, int temp_ke
 float highlightOpacity = 175;
 boolean animate = false;
 void animateNote(){
+      println(this.keyValue + "was animated!!!!");
         this.animate = true;
         this.highlightOpacity = 255;
 }
@@ -62,7 +63,8 @@ void drawNote(){
         if (debug) {
                 // text("x: " + x + ",y: " + y +);
                 fill(255/2);
-                text(("keyValue: " + keyValue), x, y, noteWidth, noteHeight);
+                text(("keyValue: " + keyValue + "highlight: " + highlight + "highlightColor: " +  highlightColor + "highlightOpacity: " + highlightOpacity), x, y, noteWidth, noteHeight);
+
         }
 }
 

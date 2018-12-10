@@ -7,6 +7,7 @@
 // TODO HAND
 // TODO AUDIO SAMPLES IMPLEMENTERES
 // TODO STAFF CODE
+// animate yellow looks weird blame mikkel
 
 
 //
@@ -86,12 +87,19 @@ void nextStep(){
                 println("STEP4");
                 staff.show = false;
                 this.highlightAll = false;
-                this.loadChunk(giveCSVpath(chunkCounter));
-                this.highlightNext();
+                if (this.chunkCounter == 2) {
+                        playNfreeze(finalremark);
+                }
+                else
+                {this.loadChunk(giveCSVpath(chunkCounter));
+                 this.highlightNext();
+                 playNfreeze(speakStep3);}
+
+
                 println("asdfasdf");
                 // this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
-                playNfreeze(speakStep3);
+
         }
 }
 

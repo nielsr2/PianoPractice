@@ -1,7 +1,6 @@
 
-// TODO implement noloop, to reduce cpu.
-// TODO samples instead of synth
-// TODO implement keyboard MIDI
+
+// TODO FIX GRAY HIGHLIGHTS
 //
 // LIBRARIES we use
 import org.multiply.processing.*; // for event timer

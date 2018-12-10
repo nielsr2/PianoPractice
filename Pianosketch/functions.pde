@@ -4,7 +4,7 @@ int fingerColor(int finger){
                 return #FF0000;
         }
         else if (finger == 2) {
-                return #CBFF00;
+                return #EBEB00;
         }
         else if (finger == 3) {
                 return #00FF68;
@@ -34,6 +34,7 @@ void keyPressed() {
                 noteManager.playChunk();
         }
         if (key == ENTER) {
+          noteManager.playChunk();
                 // playSample();
                 // println("YASS");
                 // printArray(noteManager.currentChunk);
@@ -52,7 +53,7 @@ void playNfreeze(SoundFile audio) {
                 delay(1000);
                 if (audio.isPlaying()) {
                         i++;
-                        println("File is still playing after " + i + " seconds");
+                        // println("File is still playing after " + i + " seconds");
                 } else {
                         break;
                 }

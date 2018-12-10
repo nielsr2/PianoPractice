@@ -80,8 +80,8 @@ void nextStep(){
                 this.loadChunk(giveCSVpath(chunkCounter));
                 // this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
-                this.greyHighlight= true;
-                this.highlightNext();
+                //this.highlightAll = false;
+                this.greyHighlight = true;
                 playNfreeze(speakStep2);
 
         }

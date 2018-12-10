@@ -18,6 +18,7 @@ int arraySize, valueOffset;
 Note[] notes;
 // sinOsc sine;
 boolean highlightAll = false;
+boolean greyHighlight = false;
 boolean debug = true;
 boolean sequence = false;
 
@@ -71,7 +72,7 @@ void nextStep(){
                 println("STEP2");
                 // this.setUI("yas no sequence");
                 this.sequence = true;
-                this.highlightNext();
+                // this.highlightNext();
                 playNfreeze(speakStep1);
         }
         if (this.step == 3 ) {
@@ -79,6 +80,7 @@ void nextStep(){
                 this.loadChunk(giveCSVpath(chunkCounter));
                 // this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
+                this.greyHighlight= true;
                 this.highlightNext();
                 playNfreeze(speakStep2);
 

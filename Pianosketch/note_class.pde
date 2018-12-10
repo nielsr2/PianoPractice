@@ -66,6 +66,9 @@ void drawNote(){
                 text(("keyValue: " + keyValue + "highlight: " + highlight + "highlightColor: " +  highlightColor + "highlightOpacity: " + highlightOpacity), x, y, noteWidth, noteHeight);
 
         }
+        if (noteManager.greyHighlight==true){
+          fill(#CCCCCC);
+        }
 }
 
 // use this to set highlight boo + colour

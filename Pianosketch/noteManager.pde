@@ -6,6 +6,8 @@
 // TODO fingering pic, and make colors fit with function for int
 // TODO make staff pics KATRINE;
 // TODO write razvan
+// TODO FILTER OUT OUT OF BOUNDS NOTES
+//
 
 
 class NoteManager {

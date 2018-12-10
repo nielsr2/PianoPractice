@@ -72,7 +72,7 @@ void loadSamples(){
                 int octaveStep = i % 12;
                 println(octaveStep);
 
-                if (octaveStep == 1) {
+                if (octaveStep == 0) {
                         octave++;
                 };
                 samples.add(new SoundFile(this, noteNames[octaveStep] + octave + ".wav"));

@@ -115,8 +115,9 @@ void onMIDI(int value){
           noteManager.isNextNote(this.keyValue);
   }
   else
+
   {
-          noteManager.isAnyNote(this.keyValue);
+  
   }
 }
 

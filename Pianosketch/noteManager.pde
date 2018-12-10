@@ -1,4 +1,4 @@
- // TODO make delay longer
+// TODO make delay longer
 // TODO speech
 // TODO make chunk CSV, make two versions noobs/pro MIKKEL
 // TODO fri-leg til sidst
@@ -58,7 +58,12 @@ void nextStep(){
 
                 staff.show = true;
                 // delay(1000);
-                playNfreeze(speak1);
+                if (chunkCounter == 1) {
+                        playNfreeze(startremark);
+                }
+                if (chunkCounter == 2) {
+                        playNfreeze(speakStep4);
+                }
                 this.playChunk();
         }
         if (this.step == 2 ) {
@@ -66,7 +71,7 @@ void nextStep(){
                 // this.setUI("yas no sequence");
                 this.sequence = true;
                 this.highlightNext();
-                playNfreeze(speak1);
+                playNfreeze(speakStep1);
         }
         if (this.step == 3 ) {
                 println("STEP3");
@@ -74,7 +79,7 @@ void nextStep(){
                 // this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
                 this.highlightNext();
-                playNfreeze(speak1);
+                playNfreeze(speakStep2);
 
         }
         if (this.step == 4 ) {
@@ -86,23 +91,11 @@ void nextStep(){
                 println("asdfasdf");
                 // this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
-                playNfreeze(speak1);
+                playNfreeze(speakStep3);
         }
 }
 
-void playTone(int keyValue){
-        // http://newt.phys.unsw.edu.au/jw/notes.html
-        float test = float(keyValue + this.valueOffset);
 
-        // float freq = 2.^((this.keyValue-69)/12)*440.;
-        float freq = pow(2,(test-69)/12);
-        freq = freq*440.;
-        // println(freq, keyValue);
-
-        SINE.set(freq,0.5,0.0,1);
-        SINE.play();
-        ENV.play(SINE,0.1,0.004,0.3,0.4);
-}
 void playChunk(){
         timerCount = 0;
         noteTimer.setEnabled(true);

@@ -22,13 +22,15 @@ Staff staff;
 
 int timerCount = 0;
 SoundFile file;
-SoundFile speak1, speak2, speak3;
+SoundFile startremark, speakStep1, speakStep2, speakStep3, speakStep4, finalremark;
 void setup() {
-
-         speak1 = new SoundFile(this, "speak/speak4.wav");
-        speak2 = new SoundFile(this, "speak/speak2.wav");
-        speak3 = new SoundFile(this, "speak/speak3.wav");
-        file  = new SoundFile(this, "sample.wav");
+         startremark = new SoundFile(this, "speak/startremark.wav");
+        speakStep1 = new SoundFile(this, "speak/step1.wav");
+        speakStep2 = new SoundFile(this, "speak/step2.wav");
+        speakStep3 = new SoundFile(this, "speak/step3.wav");
+        speakStep4 = new SoundFile(this, "speak/step4.wav");
+        finalremark = new SoundFile(this, "speak/finalremark.wav");
+        // file  = new SoundFile(this, "sample.wav");
         size(1000,1000);
         setupTimer();
         staff = new Staff(50., 200);

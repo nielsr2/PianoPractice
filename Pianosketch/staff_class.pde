@@ -13,7 +13,8 @@ Staff( float temp_y, int temp_staffHeight) {
         // temp_x = x;
 }
 boolean show = true;
-boolean debug = false;
+
+
 int staffHandX = 700;
 int staffHandY = 700;
 int staffHandWidth = 300;
@@ -26,7 +27,7 @@ void drawStaff(){
                 imageMode(CORNER);
                 image(img2,staffHandX,staffHandY,staffHandWidth,staffHandheight);
         }
-        if (this.debug) {
+        if (DEBUG) {
                 text(("STAFF - show:" + show + ",x & y" + str(x) + str(y) + ",height: " + staffHeight), 20, 20);
         }
 }
@@ -34,4 +35,24 @@ void loadpic(String path){
         img = loadImage(path);
         img.resize(width,0);
 }
+}
+
+// are we 100 % sure we can't do this without ArrayList
+ArrayList<SoundFile> samples = new ArrayList<SoundFile>();
+void loadSamples(){
+        // [] samples = new SoundFile(this, "test");
+        String[] noteNames = {"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
+        int octave  = 0;
+        for (int i = 0; i < noteManager.arraySize; i++) {
+                int octaveStep = i % 12;
+                println(octaveStep);
+
+                if (octaveStep == 0) {
+                        octave++;
+                };
+                samples.add(new SoundFile(this, noteNames[octaveStep] + octave + ".wav"));
+                println(noteNames[(octaveStep)] + octave + ".wav");
+                // samples[i] = new SoundFile(this, noteNames[octaveStep-1] + octave + ".wav");
+        }
+        printArray(samples);
 }

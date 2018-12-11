@@ -7,14 +7,11 @@ PImage pianoBackground;
 
 MidiBus myKeyboard;
 
-SinOsc SINE;
-Env ENV;
-
 NoteManager noteManager;
 
 Staff staff;
 
-
+boolean DEBUG;
 int timerCount = 0;
 SoundFile file;
 SoundFile startremark, speakStep1, speakStep2, speakStep3, speakStep4, finalremark;

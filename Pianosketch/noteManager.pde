@@ -196,7 +196,7 @@ void displayNotes(boolean displayAll) {
                 }
         }
         this.drawUI();
-        if (debug) {
+        if (DEBUG) {
                 fill(255/2);
                 // String strCurrentChunk = join(nf(currentChunk, 0), ", ");
                 text(("manager - current chunk" + currentChunk2 + ", arraySize" + arraySize + "offset: " + valueOffset + "step" + this.step + "countChunk" + chunkCounter + "sequence: " + this.sequence), 0, 900);

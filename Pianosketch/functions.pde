@@ -31,13 +31,11 @@ String giveCSVpath(int count){
 void keyPressed() {
         if (key == TAB) {
                 println("YASS");
-            if    (noteManager.debug) {
-                  noteManager.debug = false;
-                  staff.debug = false;
+            if    (DEBUG) {
+                  DEBUG = false;
                 }
                 else {
-                  noteManager.debug = true;
-                  staff.debug = true;
+                  DEBUG = true;
                 };
         }
         if (key == ENTER) {
@@ -59,35 +57,10 @@ void playNfreeze(SoundFile audio) {
         while (true) {
                 delay(1000);
                 if (audio.isPlaying()) {
-                        i++;
-                        // println("File is still playing after " + i + " seconds");
+                        // i++;
+                        // // println("File is still playing after " + i + " seconds");
                 } else {
                         break;
                 }
         }
-}
-
-// SoundFile[] samples = new SoundFile[noteManager.arraySize];
-ArrayList<SoundFile> samples = new ArrayList<SoundFile>();
-void loadSamples(){
-        // [] samples = new SoundFile(this, "test");
-
-
-
-        String[] noteNames = {"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
-        int octave  = 0;
-        for (int i = 0; i < noteManager.arraySize; i++) {
-                int octaveStep = i % 12;
-                println(octaveStep);
-
-                if (octaveStep == 0) {
-                        octave++;
-                };
-                samples.add(new SoundFile(this, noteNames[octaveStep] + octave + ".wav"));
-                println(noteNames[(octaveStep)] + octave + ".wav");
-                // samples[i] = new SoundFile(this, noteNames[octaveStep-1] + octave + ".wav");
-
-
-        }
-        printArray(samples);
 }

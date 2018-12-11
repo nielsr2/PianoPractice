@@ -27,7 +27,7 @@ Note(float temp_x,float temp_y, float temp_width, float temp_height, int temp_ke
 }
 
 
-float highlightOpacity = 175;
+float highlightOpacity = 125;
 boolean animate = false;
 void animateNote(){
       println(this.keyValue + "was animated!!!!");
@@ -50,7 +50,7 @@ void drawNote(){
         if (this.animate) {
                 this.highlightOpacity += -10.;
                 // println("this.highlightOpacity: ", this.highlightOpacity);
-                if (this.highlightOpacity < 175) {
+                if (this.highlightOpacity < 125) {
                         animate = false;
                 }
         }
@@ -70,6 +70,13 @@ void drawNote(){
                 text(("keyValue: " + keyValue + "highlight: " + highlight + "highlightColor: " +  highlightColor + "highlightOpacity: " + highlightOpacity), x, y, noteWidth, noteHeight);
 
         }
+
+        if (this.animate) {
+                fill(200,this.highlightOpacity-50);
+                rect(this.x,this.y,this.noteWidth,this.noteHeight);
+              }
+
+
 
 }
 

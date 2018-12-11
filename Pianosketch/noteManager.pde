@@ -366,7 +366,7 @@ void clearHighlights(){
 
 void highlightNext(){
         int next = this.currentChunk2.get(0) - this.valueOffset;
-        this.notes[next].highlightOpacity = 255.;
+        this.notes[next].highlightOpacity = 255;
 }
 
 }

@@ -10,7 +10,7 @@ float noteHeight;
 int keyValue;
 boolean highlightActive = false;
 boolean isSharp = true;
-boolean debug = true;
+boolean debug = false;
 // SinOsc sine;
 // SoundFile sound;
 Note(float temp_x,float temp_y, float temp_width, float temp_height, int temp_keyValue, boolean sharp){
@@ -64,7 +64,7 @@ void drawNote(){
         }
 
         rect(this.x,this.y,this.noteWidth,this.noteHeight);
-        if (debug) {
+        if (noteManager.debug) {
                 // text("x: " + x + ",y: " + y +);
                 fill(255/2);
                 text(("keyValue: " + keyValue + "highlight: " + highlight + "highlightColor: " +  highlightColor + "highlightOpacity: " + highlightOpacity), x, y, noteWidth, noteHeight);
@@ -87,7 +87,7 @@ void highlightNote(boolean temp_highlight, int temp_highlightColor){
 boolean checkClick(float mouse_x, float mouse_y){
         if (mouse_x > this.x && mouse_x < (this.x + this.noteWidth) && mouse_y > this.y && mouse_y < this.y + (this.noteHeight) ) {
                 // println("key hit, value was ", this.keyValue);
-
+                playSample(this.keyValue);
                 // this.playTone();
                 this.animateNote();
                 if (noteManager.sequence) {
@@ -119,7 +119,7 @@ void onMIDI(int value){
   else
 
   {
-  
+
   }
 }
 

@@ -7,13 +7,13 @@ PImage img2;
 Staff( float temp_y, int temp_staffHeight) {
         this.y = temp_y;
         this.staffHeight = temp_staffHeight;
-        img = loadImage("assets/staff.png");
-        img.resize(0,this.staffHeight);
+        img = loadImage("assets/StaffImages/Chunk1.png");
+        img.resize(width,0);
        img2 = loadImage("assets/hand.png");
         // temp_x = x;
 }
 boolean show = true;
-boolean debug = true;
+boolean debug = false;
 int staffHandX = 700;
 int staffHandY = 700;
 int staffHandWidth = 300;
@@ -21,7 +21,7 @@ int staffHandheight = 400;
 void drawStaff(){
         if (this.show) {
                 imageMode(CORNERS);
-                rect(0,this.y, width, this.staffHeight);
+                // rect(0,this.y, width, this.staffHeight);
                 image(img, x, y);
                 imageMode(CORNER);
                 image(img2,staffHandX,staffHandY,staffHandWidth,staffHandheight);
@@ -30,8 +30,8 @@ void drawStaff(){
                 text(("STAFF - show:" + show + ",x & y" + str(x) + str(y) + ",height: " + staffHeight), 20, 20);
         }
 }
-void loadpic(int chunkInt){
-        img = loadImage("assets/staff" + chunkInt + ".png");
-        img.resize(0,this.staffHeight);
+void loadpic(String path){
+        img = loadImage(path);
+        img.resize(width,0);
 }
 }

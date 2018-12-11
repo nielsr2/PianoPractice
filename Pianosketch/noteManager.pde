@@ -19,7 +19,7 @@ Note[] notes;
 // sinOsc sine;
 boolean highlightAll = false;
 boolean greyHighlight = false;
-boolean debug = true;
+boolean debug = false;
 boolean sequence = false;
 
 String[] chunks;
@@ -48,33 +48,47 @@ void nextStep(){
                 // this.nextStep();
         }
         if (this.step == 1) {
+          // if (this.chunkCounter == 1) {
+          //   staff.loadpic("assets/StaffImages/Chunk1.png");
+          // }
+          if (this.chunkCounter == 2) {
+            staff.loadpic("assets/StaffImages/Chunk2.png");
+          }
                 println("STEP1");
-                 this.sequence = true;
+                if (this.chunkCounter == 3) {
+                        this.sequence = false;
+                        playNfreeze(finalremark);
+                } else
+                {
+                        this.sequence = true;
+                        this.greyHighlight = false;
+                        // while (speak1.isPlaying()) {
+                        //   println("HAHAHA");
+                        // }
 
-                // while (speak1.isPlaying()) {
-                //   println("HAHAHA");
-                // }
+                        println("DONE......");
+                        this.highlightAll = true;
+                        this.loadChunk(giveCSVpath(chunkCounter));
 
-                println("DONE......");
-                this.highlightAll = true;
-                this.loadChunk(giveCSVpath(chunkCounter));
+                        staff.show = true;
 
-                staff.show = true;
-                // delay(1000);
-                if (chunkCounter == 1) {
-                        playNfreeze(startremark);
+                        // delay(1000);
+                        if (chunkCounter == 1) {
+                                playNfreeze(startremark);
+                        }
+                        if (chunkCounter == 2) {
+                                playNfreeze(speakStep4);
+                        }
+                        this.playChunk();
                 }
-                if (chunkCounter == 2) {
-                        playNfreeze(speakStep4);
-                }
-                this.playChunk();
         }
         if (this.step == 2 ) {
                 println("STEP2");
                 // this.setUI("yas no sequence");
                 this.sequence = true;
-                // this.highlightNext();
+
                 playNfreeze(speakStep1);
+                this.highlightNext();
         }
         if (this.step == 3 ) {
                 println("STEP3");
@@ -82,22 +96,20 @@ void nextStep(){
                 // this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
                 //this.highlightAll = false;
+                staff.loadpic("assets/StaffImages/Staff.png");
                 this.greyHighlight = true;
                 playNfreeze(speakStep2);
+
 
         }
         if (this.step == 4 ) {
                 println("STEP4");
                 staff.show = false;
                 this.highlightAll = false;
-                if (this.chunkCounter == 2) {
-                  this.sequence = false;
-                        playNfreeze(finalremark);
-                }
-                else
-                {this.loadChunk(giveCSVpath(chunkCounter));
-                 this.highlightNext();
-                 playNfreeze(speakStep3);}
+
+                this.loadChunk(giveCSVpath(chunkCounter));
+                this.highlightNext();
+                playNfreeze(speakStep3);
 
 
                 println("asdfasdf");
@@ -171,7 +183,7 @@ void displayNotes(boolean displayAll) {
         if (debug) {
                 fill(255/2);
                 // String strCurrentChunk = join(nf(currentChunk, 0), ", ");
-                text(("manager - current chunk" + currentChunk2 + ", arraySize" + arraySize + "offset: " + valueOffset + "step" + this.step + "countChunk" + chunkCounter), 0, 900);
+                text(("manager - current chunk" + currentChunk2 + ", arraySize" + arraySize + "offset: " + valueOffset + "step" + this.step + "countChunk" + chunkCounter + "sequence: " + this.sequence), 0, 900);
         }
 }
 

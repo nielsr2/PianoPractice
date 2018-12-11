@@ -31,7 +31,14 @@ String giveCSVpath(int count){
 void keyPressed() {
         if (key == TAB) {
                 println("YASS");
-                noteManager.playChunk();
+            if    (noteManager.debug) {
+                  noteManager.debug = false;
+                  staff.debug = false;
+                }
+                else {
+                  noteManager.debug = true;
+                  staff.debug = true;
+                };
         }
         if (key == ENTER) {
           noteManager.playChunk();

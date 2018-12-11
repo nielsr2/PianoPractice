@@ -1,30 +1,7 @@
-// TODO make delay longer
-// TODO speech
-// TODO make chunk CSV, make two versions noobs/pro MIKKEL
-// TODO fri-leg til sidst
-// TODO fix note highlight
-// TODO fingering pic, and make colors fit with function for int
-// TODO HAND
-// TODO AUDIO SAMPLES IMPLEMENTERES
-// TODO STAFF CODE
-// animate yellow looks weird blame mikkel
-
-
-//
-
-
 class NoteManager {
 int arraySize, valueOffset;
 Note[] notes;
-// sinOsc sine;
-boolean highlightAll = false;
-boolean greyHighlight = false;
-boolean debug = false;
-boolean sequence = false;
-
 String[] chunks;
-int chunkCounter = 1;
-int step = 1;
 NoteManager(int notesArraySize, int noteValueOffset, int howManyChunks) {
         chunks = new String[howManyChunks];
         for (int i = 0; i < howManyChunks; i++) {
@@ -35,10 +12,23 @@ NoteManager(int notesArraySize, int noteValueOffset, int howManyChunks) {
         notes = new Note[arraySize];
         spreadOut();
         // printArray(notes);
-
-
         // printArray(notes  .highlightColor);
 }
+
+/*
+███████ ████████ ███████ ██████
+██         ██    ██      ██   ██
+███████    ██    █████   ██████
+     ██    ██    ██      ██
+███████    ██    ███████ ██
+*/
+
+boolean highlightAll = false;
+boolean greyHighlight = false;
+boolean sequence = false;
+int chunkCounter = 1;
+
+int step = 1;
 void nextStep(){
         if (this.step == 0 ) {
                 chunkCounter++;
@@ -119,11 +109,29 @@ void nextStep(){
         }
 }
 
+/*
+██████  ██       █████  ██    ██
+██   ██ ██      ██   ██  ██  ██
+██████  ██      ███████   ████
+██      ██      ██   ██    ██
+██      ███████ ██   ██    ██
+*/
+
 
 void playChunk(){
         timerCount = 0;
         noteTimer.setEnabled(true);
 }
+
+/*
+███████ ██████  ██████  ███████  █████  ██████
+██      ██   ██ ██   ██ ██      ██   ██ ██   ██
+███████ ██████  ██████  █████   ███████ ██   ██
+     ██ ██      ██   ██ ██      ██   ██ ██   ██
+███████ ██      ██   ██ ███████ ██   ██ ██████
+*/
+
+
 
 void spreadOut(){
         // TODO FIX THE MAGIC NUMBER 15 ( 5 sharps per octave, over 3 octaves, 15)
@@ -160,6 +168,15 @@ void spreadOut(){
                 }
         }
 }
+
+/*
+██████  ██████   █████  ██     ██
+██   ██ ██   ██ ██   ██ ██     ██
+██   ██ ██████  ███████ ██  █  ██
+██   ██ ██   ██ ██   ██ ██ ███ ██
+██████  ██   ██ ██   ██  ███ ███
+*/
+
 
 
 void displayNotes(boolean displayAll) {
@@ -329,7 +346,6 @@ void drawUI(){
                 // // fill(255/2);
                 // textMode(CENTER);
                 // text(this.message,width/2, height/2);
-                // noLoop();
         }
 }
 

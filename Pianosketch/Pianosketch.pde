@@ -1,7 +1,3 @@
-
-
-// TODO FIX GRAY HIGHLIGHTS
-//
 // LIBRARIES we use
 import org.multiply.processing.*; // for event timer https://kapeli.com/dash_share?path=http://multiply.org/processing/
 import processing.sound.*; // playing sound
@@ -37,10 +33,7 @@ void setup() {
         loadSamples();
         MidiBus.list();
         myKeyboard = new MidiBus(this,0,1); // parent, input, output (see console for listed midi in/outs) // http://www.smallbutdigital.com/docs/themidibus/themidibus/MidiBus.html
-// INSTANCE OF THE SinOsc, which is a sine wave oscillator.
-        SINE = new SinOsc(this);
-        // THIS, IS ENVELOPE = THE CONTROL OF VOLUME (DIGITAL AUDIO IS A LOT OF DIGITS BETWEEN -1. AND 1      , making the soundwaves. YOU CONTROL THE VOLUME BY MULTIPLYING THE WAVE FROM 0. ( NO SOUND) TO 1( ABOVE 1 THEN it's becoming larger than it originally was (these sine are prolly maxed out, but soundfiles might not)). the envelope part comes in, it's volume control over time. ASR, Attack, how  )
-        ENV = new Env(this);
+
         noteManager.setUI("hellloooo");
 
 

@@ -1,3 +1,5 @@
+
+
 TimedEventGenerator noteTimer;
 int prevNote;
 void timedPlaying(){

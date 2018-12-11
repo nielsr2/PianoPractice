@@ -133,16 +133,15 @@ void spreadOut(){
         float noteHeight = 300;
         float noteWidth = width/float(this.arraySize-15);
         for( int i = 0; i < this.arraySize; i++ ) {
-
                 int step = (i + 1) % 12;
                 // println(step);
                 if (step == 2 ||
                     step == 4 ||
-                    step ==7 ||
+                    step == 7 ||
                     step == 9 ||
                     step == 11 ) {
                         // println("exception");
-                        notes[i ] = new Note(offsetSharpCount*(noteWidth/2) + (noteWidth/4),height/3,
+                        notes[i] = new Note(offsetSharpCount*(noteWidth/2) + (noteWidth/4),height/3,
                                              noteWidth/2, noteHeight*0.6, (valueOffset + i), true);
                         if (step == 4) {
                                 offsetSharpCount++;

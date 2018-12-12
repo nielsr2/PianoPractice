@@ -11,8 +11,6 @@ NoteManager(int notesArraySize, int noteValueOffset, int howManyChunks) {
         arraySize = notesArraySize;
         notes = new Note[arraySize];
         spreadOut();
-        // printArray(notes);
-        // printArray(notes  .highlightColor);
 }
 
 /*
@@ -52,10 +50,6 @@ void nextStep(){
                 {
                         this.sequence = true;
                         this.greyHighlight = false;
-                        // while (speak1.isPlaying()) {
-                        //   println("HAHAHA");
-                        // }
-
                         println("DONE......");
                         this.highlightAll = true;
                         this.loadChunk(giveCSVpath(chunkCounter));
@@ -195,10 +189,9 @@ void displayNotes(boolean displayAll) {
                         }
                 }
         }
-        this.drawUI();
+
         if (DEBUG) {
                 fill(255/2);
-                // String strCurrentChunk = join(nf(currentChunk, 0), ", ");
                 text(("manager - current chunk" + currentChunk2 + ", arraySize" + arraySize + "offset: " + valueOffset + "step" + this.step + "countChunk" + chunkCounter + "sequence: " + this.sequence), 0, 900);
         }
 }
@@ -366,7 +359,7 @@ void clearHighlights(){
 
 void highlightNext(){
         int next = this.currentChunk2.get(0) - this.valueOffset;
-        this.notes[next].highlightOpacity = 255;
+        this.notes[next].highlightOpacity = 255.;
 }
 
 }

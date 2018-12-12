@@ -1,7 +1,30 @@
+// TODO make delay longer
+// TODO speech
+// TODO make chunk CSV, make two versions noobs/pro MIKKEL
+// TODO fri-leg til sidst
+// TODO fix note highlight
+// TODO fingering pic, and make colors fit with function for int
+// TODO HAND
+// TODO AUDIO SAMPLES IMPLEMENTERES
+// TODO STAFF CODE
+// animate yellow looks weird blame mikkel
+
+
+//
+
+
 class NoteManager {
 int arraySize, valueOffset;
 Note[] notes;
+// sinOsc sine;
+boolean highlightAll = false;
+boolean greyHighlight = false;
+boolean debug = true;
+boolean sequence = false;
+
 String[] chunks;
+int chunkCounter = 1;
+int step = 1;
 NoteManager(int notesArraySize, int noteValueOffset, int howManyChunks) {
         chunks = new String[howManyChunks];
         for (int i = 0; i < howManyChunks; i++) {
@@ -11,22 +34,11 @@ NoteManager(int notesArraySize, int noteValueOffset, int howManyChunks) {
         arraySize = notesArraySize;
         notes = new Note[arraySize];
         spreadOut();
+        // printArray(notes);
+
+
+        // printArray(notes  .highlightColor);
 }
-
-/*
-███████ ████████ ███████ ██████
-██         ██    ██      ██   ██
-███████    ██    █████   ██████
-     ██    ██    ██      ██
-███████    ██    ███████ ██
-*/
-
-boolean highlightAll = false;
-boolean greyHighlight = false;
-boolean sequence = false;
-int chunkCounter = 1;
-
-int step = 1;
 void nextStep(){
         if (this.step == 0 ) {
                 chunkCounter++;
@@ -36,43 +48,33 @@ void nextStep(){
                 // this.nextStep();
         }
         if (this.step == 1) {
-          // if (this.chunkCounter == 1) {
-          //   staff.loadpic("assets/StaffImages/Chunk1.png");
-          // }
-          if (this.chunkCounter == 2) {
-            staff.loadpic("assets/StaffImages/Chunk2.png");
-          }
                 println("STEP1");
-                if (this.chunkCounter == 3) {
-                        this.sequence = false;
-                        playNfreeze(finalremark);
-                } else
-                {
-                        this.sequence = true;
-                        this.greyHighlight = false;
-                        println("DONE......");
-                        this.highlightAll = true;
-                        this.loadChunk(giveCSVpath(chunkCounter));
+                 this.sequence = true;
 
-                        staff.show = true;
+                // while (speak1.isPlaying()) {
+                //   println("HAHAHA");
+                // }
 
-                        // delay(1000);
-                        if (chunkCounter == 1) {
-                                playNfreeze(startremark);
-                        }
-                        if (chunkCounter == 2) {
-                                playNfreeze(speakStep4);
-                        }
-                        this.playChunk();
+                println("DONE......");
+                this.highlightAll = true;
+                this.loadChunk(giveCSVpath(chunkCounter));
+
+                staff.show = true;
+                // delay(1000);
+                if (chunkCounter == 1) {
+                        playNfreeze(startremark);
                 }
+                if (chunkCounter == 2) {
+                        playNfreeze(speakStep4);
+                }
+                this.playChunk();
         }
         if (this.step == 2 ) {
                 println("STEP2");
                 // this.setUI("yas no sequence");
                 this.sequence = true;
-
+                // this.highlightNext();
                 playNfreeze(speakStep1);
-                this.highlightNext();
         }
         if (this.step == 3 ) {
                 println("STEP3");
@@ -80,20 +82,22 @@ void nextStep(){
                 // this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
                 //this.highlightAll = false;
-                staff.loadpic("assets/StaffImages/Staff.png");
                 this.greyHighlight = true;
                 playNfreeze(speakStep2);
-
 
         }
         if (this.step == 4 ) {
                 println("STEP4");
                 staff.show = false;
                 this.highlightAll = false;
-
-                this.loadChunk(giveCSVpath(chunkCounter));
-                this.highlightNext();
-                playNfreeze(speakStep3);
+                if (this.chunkCounter == 2) {
+                  this.sequence = false;
+                        playNfreeze(finalremark);
+                }
+                else
+                {this.loadChunk(giveCSVpath(chunkCounter));
+                 this.highlightNext();
+                 playNfreeze(speakStep3);}
 
 
                 println("asdfasdf");
@@ -103,29 +107,11 @@ void nextStep(){
         }
 }
 
-/*
-██████  ██       █████  ██    ██
-██   ██ ██      ██   ██  ██  ██
-██████  ██      ███████   ████
-██      ██      ██   ██    ██
-██      ███████ ██   ██    ██
-*/
-
 
 void playChunk(){
         timerCount = 0;
         noteTimer.setEnabled(true);
 }
-
-/*
-███████ ██████  ██████  ███████  █████  ██████
-██      ██   ██ ██   ██ ██      ██   ██ ██   ██
-███████ ██████  ██████  █████   ███████ ██   ██
-     ██ ██      ██   ██ ██      ██   ██ ██   ██
-███████ ██      ██   ██ ███████ ██   ██ ██████
-*/
-
-
 
 void spreadOut(){
         // TODO FIX THE MAGIC NUMBER 15 ( 5 sharps per octave, over 3 octaves, 15)
@@ -133,8 +119,10 @@ void spreadOut(){
         int offsetCount = 0;
         int offsetSharpCount = 0;
         float noteHeight = 300;
-        float noteWidth = width/float(this.arraySize-15);
+        float noteWidth = width/float(this.arraySize-howManyOctaves);
+        int howManyOctaves = this.arraySize/12;
         for( int i = 0; i < this.arraySize; i++ ) {
+
                 int step = (i + 1) % 12;
                 // println(step);
                 if (step == 2 ||
@@ -155,7 +143,7 @@ void spreadOut(){
 
                 }
                 else {
-                        notes[i] = new Note(offsetCount*((width/float(this.arraySize-15))),
+                        notes[i] = new Note(offsetCount*((width/float(this.arraySize-howManyOctaves))),
                                             height/3, noteWidth, noteHeight, (valueOffset + i), false);
                         offsetCount++;
                         offsetSharpCount++;
@@ -163,17 +151,8 @@ void spreadOut(){
         }
 }
 
-/*
-██████  ██████   █████  ██     ██
-██   ██ ██   ██ ██   ██ ██     ██
-██   ██ ██████  ███████ ██  █  ██
-██   ██ ██   ██ ██   ██ ██ ███ ██
-██████  ██   ██ ██   ██  ███ ███
-*/
 
-
-
-void drawNotes(boolean displayAll) {
+void displayNotes(boolean displayAll) {
         rectMode(CORNER);
         if (displayAll) {
                 for( int i = 0; i < this.arraySize; i++ ) {
@@ -189,10 +168,11 @@ void drawNotes(boolean displayAll) {
                         }
                 }
         }
-
-        if (DEBUG) {
+        this.drawUI();
+        if (debug) {
                 fill(255/2);
-                text(("manager - current chunk" + currentChunk2 + ", arraySize" + arraySize + "offset: " + valueOffset + "step" + this.step + "countChunk" + chunkCounter + "sequence: " + this.sequence), 0, 900);
+                // String strCurrentChunk = join(nf(currentChunk, 0), ", ");
+                text(("manager - current chunk" + currentChunk2 + ", arraySize" + arraySize + "offset: " + valueOffset + "step" + this.step + "countChunk" + chunkCounter), 0, 900);
         }
 }
 
@@ -219,7 +199,7 @@ void loadChunk(String csvfile)  {
 
         }
         println("chunk loaded :");
-        // highlightNext(); // QUESTION do we need this?
+        highlightNext();
         printArray(currentChunk2);
 }
 /*
@@ -281,7 +261,7 @@ boolean isAnyNote(int noteValue) {
  */
 
 
-void checkClicks(float x, float y) {
+void click(float x, float y) {
 
         //  this whole if-shenanigan is about black keys vs white keys. Since black keys are above the white ones, we want to check those first cuz overlaps
         boolean found = false;
@@ -339,6 +319,7 @@ void drawUI(){
                 // // fill(255/2);
                 // textMode(CENTER);
                 // text(this.message,width/2, height/2);
+                // noLoop();
         }
 }
 
@@ -359,7 +340,7 @@ void clearHighlights(){
 
 void highlightNext(){
         int next = this.currentChunk2.get(0) - this.valueOffset;
-        this.notes[next].highlightOpacity = 255.;
+        this.notes[next].highlightOpacity = 255;
 }
 
 }

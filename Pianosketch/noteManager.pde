@@ -173,7 +173,7 @@ void spreadOut(){
 
 
 
-void displayNotes(boolean displayAll) {
+void drawNotes(boolean displayAll) {
         rectMode(CORNER);
         if (displayAll) {
                 for( int i = 0; i < this.arraySize; i++ ) {
@@ -219,7 +219,7 @@ void loadChunk(String csvfile)  {
 
         }
         println("chunk loaded :");
-        highlightNext();
+        // highlightNext(); // QUESTION do we need this?
         printArray(currentChunk2);
 }
 /*
@@ -281,7 +281,7 @@ boolean isAnyNote(int noteValue) {
  */
 
 
-void click(float x, float y) {
+void checkClicks(float x, float y) {
 
         //  this whole if-shenanigan is about black keys vs white keys. Since black keys are above the white ones, we want to check those first cuz overlaps
         boolean found = false;

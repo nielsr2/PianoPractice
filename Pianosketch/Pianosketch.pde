@@ -45,7 +45,7 @@ void draw(){
         background(255);
         staff.drawStaff();
 
-        noteManager.displayNotes(true);
+        noteManager.drawNotes(true);
         // myKeyboard.controllerChange();
 text(pitchD, width/4*3, height/4*3);
 // println(pitchD);
@@ -60,6 +60,6 @@ void mouseClicked(){
         }
         else
         {
-                noteManager.click(mouseX, mouseY);
+                noteManager.checkClicks(mouseX, mouseY);
         }
 };

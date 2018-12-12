@@ -1,12 +1,12 @@
 class Staff {
 float x;
 float y;
-int staffHeight;
+int height;
 PImage img;
 PImage img2;
-Staff( float temp_y, int temp_staffHeight) {
+Staff( float temp_y, int temp_height) {
         this.y = temp_y;
-        this.staffHeight = temp_staffHeight;
+        this.height = temp_height;
         img = loadImage("assets/StaffImages/Chunk1.png");
         img.resize(width,0);
        img2 = loadImage("assets/hand.png");
@@ -15,44 +15,24 @@ Staff( float temp_y, int temp_staffHeight) {
 boolean show = true;
 
 
-int staffHandX = 700;
-int staffHandY = 700;
-int staffHandWidth = 300;
-int staffHandheight = 400;
+int handX = 700;
+int handY = 700;
+int handWidth = 300;
+int handheight = 400;
 void drawStaff(){
         if (this.show) {
                 imageMode(CORNERS);
-                // rect(0,this.y, width, this.staffHeight);
+                // rect(0,this.y, width, this.height);
                 image(img, x, y);
                 imageMode(CORNER);
-                image(img2,staffHandX,staffHandY,staffHandWidth,staffHandheight);
+                image(img2,handX,handY,handWidth,handheight);
         }
         if (DEBUG) {
-                text(("STAFF - show:" + show + ",x & y" + str(x) + str(y) + ",height: " + staffHeight), 20, 20);
+                text(("STAFF - show:" + show + ",x & y" + str(x) + str(y) + ",height: " + height), 20, 20);
         }
 }
 void loadpic(String path){
         img = loadImage(path);
         img.resize(width,0);
 }
-}
-
-// are we 100 % sure we can't do this without ArrayList
-ArrayList<SoundFile> samples = new ArrayList<SoundFile>();
-void loadSamples(){
-        // [] samples = new SoundFile(this, "test");
-        String[] noteNames = {"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
-        int octave  = 0;
-        for (int i = 0; i < noteManager.arraySize; i++) {
-                int octaveStep = i % 12;
-                println(octaveStep);
-
-                if (octaveStep == 0) {
-                        octave++;
-                };
-                samples.add(new SoundFile(this, noteNames[octaveStep] + octave + ".wav"));
-                println(noteNames[(octaveStep)] + octave + ".wav");
-                // samples[i] = new SoundFile(this, noteNames[octaveStep-1] + octave + ".wav");
-        }
-        printArray(samples);
 }

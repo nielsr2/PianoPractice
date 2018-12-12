@@ -1,10 +1,10 @@
-class Staff {
+class StaffAndHand {
 float x;
 float y;
 int height;
 PImage img;
 PImage img2;
-Staff( float temp_y, int temp_height) {
+StaffAndHand( float temp_y, int temp_height) {
         this.y = temp_y;
         this.height = temp_height;
         img = loadImage("assets/StaffImages/Chunk1.png");
@@ -19,7 +19,7 @@ int handX = 700;
 int handY = 700;
 int handWidth = 300;
 int handheight = 400;
-void drawStaff(){
+void drawStaffAndHand(){
         if (this.show) {
                 imageMode(CORNERS);
                 // rect(0,this.y, width, this.height);

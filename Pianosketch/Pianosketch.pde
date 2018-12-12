@@ -9,7 +9,7 @@ MidiBus myKeyboard;
 
 NoteManager noteManager;
 
-Staff staff;
+StaffAndHand staffAndHand;
 
 boolean DEBUG;
 int timerCount = 0;
@@ -25,7 +25,7 @@ void setup() {
         // file  = new SoundFile(this, "sample.wav");
         size(1000,1000);
         setupTimer();
-        staff = new Staff(50., 200);
+        staffAndHand = new StaffAndHand(50., 200);
         noteManager = new NoteManager(36, 24,3);
         loadSamples();
         MidiBus.list();
@@ -43,7 +43,7 @@ void draw(){
 
         // myKeyboard.sendNoteOn(channel, pitch, velocity);
         background(255);
-        staff.drawStaff();
+        staffAndHand.drawStaffAndHand();
 
         noteManager.drawNotes(true);
         // myKeyboard.controllerChange();

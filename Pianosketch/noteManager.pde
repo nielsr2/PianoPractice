@@ -37,10 +37,10 @@ void nextStep(){
         }
         if (this.step == 1) {
           // if (this.chunkCounter == 1) {
-          //   staff.loadpic("assets/StaffImages/Chunk1.png");
+          //   staffAndHand.loadpic("assets/StaffAndHandImages/Chunk1.png");
           // }
           if (this.chunkCounter == 2) {
-            staff.loadpic("assets/StaffImages/Chunk2.png");
+            staffAndHand.loadpic("assets/StaffAndHandImages/Chunk2.png");
           }
                 println("STEP1");
                 if (this.chunkCounter == 3) {
@@ -54,7 +54,7 @@ void nextStep(){
                         this.highlightAll = true;
                         this.loadChunk(giveCSVpath(chunkCounter));
 
-                        staff.show = true;
+                        staffAndHand.show = true;
 
                         // delay(1000);
                         if (chunkCounter == 1) {
@@ -80,7 +80,7 @@ void nextStep(){
                 // this.setUI("SEQUENCE!!!!");
                 this.sequence = true;
                 //this.highlightAll = false;
-                staff.loadpic("assets/StaffImages/Staff.png");
+                staffAndHand.loadpic("assets/StaffAndHandImages/StaffAndHand.png");
                 this.greyHighlight = true;
                 playNfreeze(speakStep2);
 
@@ -88,7 +88,7 @@ void nextStep(){
         }
         if (this.step == 4 ) {
                 println("STEP4");
-                staff.show = false;
+                staffAndHand.show = false;
                 this.highlightAll = false;
 
                 this.loadChunk(giveCSVpath(chunkCounter));
@@ -130,11 +130,12 @@ void playChunk(){
 void spreadOut(){
         // TODO FIX THE MAGIC NUMBER 15 ( 5 sharps per octave, over 3 octaves, 15)
         // println("width:", width/(this.arraySize-15));
+        
         int offsetCount = 0;
         int offsetSharpCount = 0;
         float noteHeight = 300;
         float noteWidth = width/float(this.arraySize-15);
-        for( int i = 0; i < this.arraySize; i++ ) {
+        for( int i = 0; i < this.arr/aySize; i++ ) {
                 int step = (i + 1) % 12;
                 // println(step);
                 if (step == 2 ||

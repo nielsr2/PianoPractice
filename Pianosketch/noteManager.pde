@@ -164,7 +164,7 @@ void spreadOut(){
 }
 
 
-void displayNotes(boolean displayAll) {
+void drawNotes(boolean displayAll) {
         rectMode(CORNER);
         if (displayAll) {
                 for( int i = 0; i < this.arraySize; i++ ) {

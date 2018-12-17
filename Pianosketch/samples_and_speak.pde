@@ -32,14 +32,14 @@ void loadSamples(){
 void playSample(int p){
         // println("p: ", p, "p-offset: ", p - noteManager.valueOffset);
         // SoundFile sample = samples.get((p - noteManager.valueOffset));
-        samples[p].amp(0.5);
-        samples[p].play();
+        samples[p - noteManager.valueOffset].amp(0.5);
+        samples[p - noteManager.valueOffset].play();
 }
 
 void stopSample(int p){
         // SoundFile sample = samples.get((p - noteManager.valueOffset));
         // sample.amp(0.5);
-        samples[p].stop();
+        samples[p- noteManager.valueOffset ].stop();
 }
 
 

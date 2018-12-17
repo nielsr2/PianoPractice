@@ -1,22 +1,8 @@
-// TODO make delay longer
-// TODO speech
-// TODO make chunk CSV, make two versions noobs/pro MIKKEL
-// TODO fri-leg til sidst
-// TODO fix note highlight
-// TODO fingering pic, and make colors fit with function for int
-// TODO HAND
-// TODO AUDIO SAMPLES IMPLEMENTERES
-// TODO STAFF CODE
-// animate yellow looks weird blame mikkel
-
-
-//
 
 
 class NoteManager {
 int arraySize, valueOffset;
 Note[] notes;
-// sinOsc sine;
 boolean highlightAll = false;
 boolean greyHighlight = false;
 boolean debug = true;
@@ -25,6 +11,7 @@ boolean sequence = false;
 String[] chunks;
 int chunkCounter = 1;
 int step = 1;
+
 NoteManager(int notesArraySize, int noteValueOffset, int howManyChunks) {
         chunks = new String[howManyChunks];
         for (int i = 0; i < howManyChunks; i++) {
@@ -48,12 +35,12 @@ void nextStep(){
                 // this.nextStep();
         }
         if (this.step == 1) {
-
+this.greyHighlight = false;
           // if (this.chunkCounter == 1) {
           //   staffAndHand.loadpic("assets/StaffAndHandImages/Chunk1.png");
           // }
           if (this.chunkCounter == 2) {
-            staffAndHand.loadpic("assets/StaffAndHandImages/Chunk2.png");
+            staffAndHand.loadpic("assets/StaffImages/Chunk2.png");
           }
 
 
@@ -67,7 +54,7 @@ void nextStep(){
                 this.highlightAll = true;
                 this.loadChunk(giveCSVpath(chunkCounter));
 
-                staff.show = true;
+                staffAndHand.show = true;
                 // delay(1000);
                 if (chunkCounter == 1) {
                         playNfreeze(startremark);
@@ -125,14 +112,14 @@ void playChunk(){
 }
 
 void spreadOut(){
-        // TODO FIX THE MAGIC NUMBER 15 ( 5 sharps per octave, over 3 octaves, 15)
-        // println("width:", width/(this.arraySize-15));
-
         int offsetCount = 0;
-        int offsetSharpCount = 0;
-        float noteHeight = 300;
-        float noteWidth = width/float(this.arraySize-howManyOctaves);
+        int offsetBlackCount = 0;
+        float noteHeight = height*0.3;
         int howManyOctaves = this.arraySize/12;
+        int howManyBlacks = 5*howManyOctaves;
+
+        float noteWidth = width/float(this.arraySize-howManyBlacks);
+
         for( int i = 0; i < this.arraySize; i++ ) {
 
                 int step = (i + 1) % 12;
@@ -143,22 +130,22 @@ void spreadOut(){
                     step == 9 ||
                     step == 11 ) {
                         // println("exception");
-                        notes[i] = new Note(offsetSharpCount*(noteWidth/2) + (noteWidth/4),height/3,
+                        notes[i] = new Note(offsetBlackCount*(noteWidth/2) + (noteWidth/4),height/3,
                                              noteWidth/2, noteHeight*0.6, (valueOffset + i), true);
                         if (step == 4) {
-                                offsetSharpCount++;
+                                offsetBlackCount++;
                         }
                         if (step == 11) {
-                                offsetSharpCount++;
+                                offsetBlackCount++;
                         }
-                        offsetSharpCount++;
+                        offsetBlackCount++;
 
                 }
                 else {
-                        notes[i] = new Note(offsetCount*((width/float(this.arraySize-howManyOctaves))),
+                        notes[i] = new Note(offsetCount*((width/float(this.arraySize-howManyBlacks))),
                                             height/3, noteWidth, noteHeight, (valueOffset + i), false);
                         offsetCount++;
-                        offsetSharpCount++;
+                        offsetBlackCount++;
                 }
         }
 }
@@ -168,13 +155,13 @@ void drawNotes(boolean displayAll) {
         rectMode(CORNER);
         if (displayAll) {
                 for( int i = 0; i < this.arraySize; i++ ) {
-                        if(!notes[i].isSharp)
+                        if(!notes[i].isBlack)
                         {
                                 notes[i].drawNote();
                         }
                 }
                 for( int i = 0; i < this.arraySize; i++ ) {
-                        if(notes[i].isSharp)
+                        if(notes[i].isBlack)
                         {
                                 notes[i].drawNote();
                         }
@@ -273,12 +260,12 @@ boolean isAnyNote(int noteValue) {
  */
 
 
-void click(float x, float y) {
+void checkClicks(float x, float y) {
 
         //  this whole if-shenanigan is about black keys vs white keys. Since black keys are above the white ones, we want to check those first cuz overlaps
         boolean found = false;
         for( int i = 0; i < this.arraySize; i++ ) {
-                if (notes[i].isSharp)
+                if (notes[i].isBlack)
                 {
                         // println("yess, playing natural");
                         if (notes[i].checkClick(x,y)) {
@@ -289,9 +276,9 @@ void click(float x, float y) {
         }
         if (!found) {
                 for( int i = 0; i < this.arraySize; i++ ) {
-                        if (!notes[i].isSharp)
+                        if (!notes[i].isBlack)
                         {
-// println("yess, playing sharp");
+// println("yess, playing black");
                                 notes[i].checkClick(x,y);
                         }
 
@@ -313,7 +300,7 @@ void click(float x, float y) {
 
 
 
-
+// this is not used for displaying anything, but it's kept as it something
 
 boolean ui;
 String message = "bah";
@@ -355,4 +342,13 @@ void highlightNext(){
         this.notes[next].highlightOpacity = 255;
 }
 
+
+// M I D I
+
+void midi(int p){
+
+        if (this.step != 1)
+        {        println("p: ", p, "p-offset: ", p - this.valueOffset);
+                 this.notes[(p - this.valueOffset)].onMIDI(p);} // }
+}
 }

@@ -1,4 +1,4 @@
-// https://atom.io/packages/processing
+
 
 
 class Note {
@@ -9,20 +9,18 @@ float noteWidth;
 float noteHeight;
 int keyValue;
 boolean highlightActive = false;
-boolean isSharp = true;
+boolean isBlack = true;
 
-// SinOsc sine;
-// SoundFile sound;
-Note(float temp_x,float temp_y, float temp_width, float temp_height, int temp_keyValue, boolean sharp){
+
+Note(float temp_x,float temp_y, float temp_width, float temp_height, int temp_keyValue, boolean black){
 
         this.x = temp_x;
         this.y = temp_y;
         this.noteWidth = temp_width;
         this.noteHeight = temp_height;
         this.keyValue =  temp_keyValue;
-        this.isSharp = sharp;
-        // println(keyValue);
-        // this.sound = SoundFile(this, "bla/piano" + this.keyValue + ".mp3");
+        this.isBlack = black;
+
 
 }
 
@@ -30,7 +28,7 @@ Note(float temp_x,float temp_y, float temp_width, float temp_height, int temp_ke
 float highlightOpacity = 125;
 boolean animate = false;
 void animateNote(){
-      println(this.keyValue + "was animated!!!!");
+      // println(this.keyValue + "was animated!!!!");
         this.animate = true;
         this.highlightOpacity = 255;
 }
@@ -41,7 +39,7 @@ void drawNote(){
         stroke(0);
         // note
         fill(#FFFFFF, 255);
-        if (isSharp) {
+        if (isBlack) {
                 fill(#444444, 255);
         }
         rect(this.x,this.y,this.noteWidth,this.noteHeight);
@@ -131,4 +129,3 @@ void onMIDI(int value){
 }
 
 }
-// TODO implement colorMode(mode)

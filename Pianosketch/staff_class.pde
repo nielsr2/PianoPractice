@@ -1,12 +1,12 @@
 class StaffAndHand {
 float x;
 float y;
-int height;
+// int height;
 PImage img;
 PImage img2;
 StaffAndHand( float temp_y, int temp_height) {
         this.y = temp_y;
-        this.height = temp_height;
+        // this.height = temp_height;
         img = loadImage("assets/StaffImages/Chunk1.png");
         img.resize(width,0);
        img2 = loadImage("assets/hand.png");
@@ -15,10 +15,10 @@ StaffAndHand( float temp_y, int temp_height) {
 boolean show = true;
 
 
-int handX = 700;
-int handY = 700;
-int handWidth = 300;
-int handheight = 400;
+float handX = height*0.7;
+float handY = height*0.7;
+float handWidth = height*0.3;
+float handheight = height*0.4;
 void drawStaffAndHand(){
         if (this.show) {
                 imageMode(CORNERS);
@@ -29,6 +29,7 @@ void drawStaffAndHand(){
         }
         if (DEBUG) {
                 text(("STAFF - show:" + show + ",x & y" + str(x) + str(y) + ",height: " + height), 20, 20);
+                // text(("HAND - show:" + show + ",x & y" + str(handX) + str(handY) + ",height: " + handWidth), 20, 40);
         }
 }
 void loadpic(String path){

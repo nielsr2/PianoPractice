@@ -2,6 +2,8 @@
 
 TimedEventGenerator noteTimer;
 int prevNote;
+
+int timerCount = 0;
 void timedPlaying(){
 
         int sizeOfChunk = noteManager.currentChunk2.size();

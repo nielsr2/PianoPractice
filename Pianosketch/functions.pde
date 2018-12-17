@@ -28,9 +28,21 @@ String giveCSVpath(int count){
 }
 
 
+void mouseClicked(){
+        if (noteManager.ui) {
+                noteManager.ui = false;
+                if (noteManager.step == 1) {
+                        noteManager.nextStep();
+                }
+        }
+        else
+        {
+                noteManager.checkClicks(mouseX, mouseY);
+        }
+};
+
 void keyPressed() {
         if (key == TAB) {
-                println("YASS");
             if    (DEBUG) {
                   DEBUG = false;
                 }
